@@ -1,0 +1,1 @@
+catavento.o: ../catavento.c
