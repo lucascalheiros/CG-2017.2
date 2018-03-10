@@ -69,16 +69,28 @@ void eqSemiCirc(int xc, int yc, int r, int dir)
     glBegin(GL_POINTS);
     if(dir==1){
         for(x = xc; x<=r+xc; x++){
+<<<<<<< HEAD:Projeto - Quadra de Basquete/ProjetoCG/eqretacirc.cpp
             y = yc + qSqrt(r*r-(x-xc)*(x-xc));
             glVertex2i(x, y);
             y = yc - qSqrt(r*r-(x-xc)*(x-xc));
+=======
+            y = yc + sqrt(r*r-(x-xc)*(x-xc));
+            glVertex2i(x, y);
+            y = yc - sqrt(r*r-(x-xc)*(x-xc));
+>>>>>>> 8e17b88... Projeto funcional - sujeito a alterações e revisões:Projeto - Quadra de Basquete/ZeLuk/ProjetoCG/eqretacirc.cpp
             glVertex2i(x, y);
         }
     } else {
         for(x = xc; x>=xc-r; x--){
+<<<<<<< HEAD:Projeto - Quadra de Basquete/ProjetoCG/eqretacirc.cpp
             y = yc + qSqrt(r*r-(x-xc)*(x-xc));
             glVertex2i(x, y);
             y = yc - qSqrt(r*r-(x-xc)*(x-xc));
+=======
+            y = yc + sqrt(r*r-(x-xc)*(x-xc));
+            glVertex2i(x, y);
+            y = yc - sqrt(r*r-(x-xc)*(x-xc));
+>>>>>>> 8e17b88... Projeto funcional - sujeito a alterações e revisões:Projeto - Quadra de Basquete/ZeLuk/ProjetoCG/eqretacirc.cpp
             glVertex2i(x, y);
         }
     }
