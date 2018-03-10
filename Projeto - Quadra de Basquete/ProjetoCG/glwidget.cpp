@@ -128,4 +128,3 @@ void drawCourt(void (*reta)(int,int,int,int), void (*circ)(int,int,int), void (*
     reta(380,75,440,75);
     reta(380,125,440,125);
 }
-
