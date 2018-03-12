@@ -27,9 +27,9 @@ public:
 private:
     QTimer timer;
     int xAtPress, yAtPress;
-    std::vector<std::pair<int,int>> firstPoint;
-    std::vector<std::pair<int,int>> secondPoint;
-    bool firstClick = true;
+    std::vector<std::pair<int,int> > firstPoint;
+    std::vector<std::pair<int,int> > secondPoint;
+    bool firstClick;
 };
 
 void drawCourt(void (*reta)(int,int,int,int), void (*circ)(int,int,int), void (*semiCirc)(int,int,int,int));

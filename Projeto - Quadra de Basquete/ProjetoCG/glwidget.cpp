@@ -24,6 +24,7 @@ void GLWidget::initializeGL() {
     glClearColor(0.5, 0.5, 0.5, 0.0);
     gluOrtho2D(0, WIDTH, 0, HEIGHT);
     glViewport(0, 0, WIDTH, HEIGHT);
+    firstClick = true;
 }
 
 void GLWidget::paintGL() {

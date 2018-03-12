@@ -1,6 +1,7 @@
 #include "eqretacirc.h"
 #include <algorithm>
 #include <GL/glut.h>
+#include <QtMath>
 
 using namespace std;
 
@@ -51,11 +52,11 @@ void eqCirc(int xc, int yc, int r)
     int x, y;
     glBegin(GL_POINTS);
     for(x = xc-r; x<=r+xc; x++){
-        y = yc + sqrt(r*r-(x-xc)*(x-xc));
+        y = yc + qSqrt(r*r-(x-xc)*(x-xc));
         glVertex2i(x, y);
     }
     for(x = xc-r; x<=r+xc; x++){
-        y = yc - sqrt(r*r-(x-xc)*(x-xc));
+        y = yc - qSqrt(r*r-(x-xc)*(x-xc));
         glVertex2i(x, y);
     }
     glEnd();
@@ -68,16 +69,16 @@ void eqSemiCirc(int xc, int yc, int r, int dir)
     glBegin(GL_POINTS);
     if(dir==1){
         for(x = xc; x<=r+xc; x++){
-            y = yc + sqrt(r*r-(x-xc)*(x-xc));
+            y = yc + qSqrt(r*r-(x-xc)*(x-xc));
             glVertex2i(x, y);
-            y = yc - sqrt(r*r-(x-xc)*(x-xc));
+            y = yc - qSqrt(r*r-(x-xc)*(x-xc));
             glVertex2i(x, y);
         }
     } else {
         for(x = xc; x>=xc-r; x--){
-            y = yc + sqrt(r*r-(x-xc)*(x-xc));
+            y = yc + qSqrt(r*r-(x-xc)*(x-xc));
             glVertex2i(x, y);
-            y = yc - sqrt(r*r-(x-xc)*(x-xc));
+            y = yc - qSqrt(r*r-(x-xc)*(x-xc));
             glVertex2i(x, y);
         }
     }
