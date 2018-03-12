@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle("CG OpenGL Project");
 }
 
 MainWindow::~MainWindow()
