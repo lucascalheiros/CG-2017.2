@@ -104,28 +104,27 @@ glPushMatrix();
 
 glColor3f(0.9f, 0.9f, 0.0f);
 
-    // Back side
+// Back side
     glPushMatrix();
         glTranslatef(0.0f, 1.3f, 0.0f);
         glBegin(GL_QUADS);  // Wall
-            glVertex3f(-2,0.7,-3);
-            glVertex3f(2,0.7,-3);
-            glVertex3f(2,-1.5,-3);
-            glVertex3f(-2,-1.5,-3);
+            glVertex3f(-2,0.7,-10);
+            glVertex3f(2,0.7,-10);
+            glVertex3f(2,-1.5,-10);
+            glVertex3f(-2,-1.5,-10);
         glEnd();
     glPopMatrix();
 
 glColor3f(0.9f, 0.9f, 0.0f);
 
-    // Right side
+// Right side
     glPushMatrix();
-
         glTranslatef(0.0f, 1.3f, 0.0f);
 
         glBegin(GL_QUADS);  // Wall
             glVertex3f(2, 0.7, 1);
-            glVertex3f(2, 0.7, -3);
-            glVertex3f(2, -1.5, -3);
+            glVertex3f(2, 0.7, -10);
+            glVertex3f(2, -1.5, -10);
             glVertex3f(2, -1.5, 1);
         glEnd();
 
@@ -150,23 +149,33 @@ glColor3f(0.9f, 0.9f, 0.0f);
             glVertex3f(2.0001, -0.8, 0.75);
              glVertex3f(2.0001, -0.8, 0.0);
         glEnd();
-
     glPopMatrix();
 
     glColor3f(0.9f, 0.9f, 0.0f);
 
-    // Left side
+// Left side
     glPushMatrix();
-
         glTranslatef(0.0f, 1.3f, 0.0f);
-
         glBegin(GL_QUADS);  // Wall
             glVertex3f(-2,0.7,1);
-            glVertex3f(-2,0.7,-3);
-            glVertex3f(-2,-1.5,-3);
+            glVertex3f(-2,0.7,-10);
+            glVertex3f(-2,-1.5,-10);
             glVertex3f(-2,-1.5,1);
         glEnd();
+    glPopMatrix();
 
+
+
+// Top
+    glPushMatrix();
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glTranslatef(0.0f, 1.3f, 0.0f);
+            glBegin(GL_QUADS);
+                glVertex3f(-2.0f, 0.7f, -10.0f);
+                glVertex3f(-2.0f, 0.7f, 1.0f);
+                glVertex3f(2.0f, 0.7f, 1.0f);
+                glVertex3f(2.0f, 0.7f, -10.0f);
+            glEnd();
     glPopMatrix();
 }
 
@@ -217,6 +226,15 @@ glColor3f(0.0f, 0.3f, 0.3f);
     glVertex3f( 100.0f, 0.0f, -100.0f);
 glEnd();
 
+// Draw sky
+glColor3f(0.5f, 0.8f, 0.9f);
+    glBegin(GL_QUADS);
+    glVertex3f(-100.0f, 4.0f, -100.0f);
+    glVertex3f(-100.0f, 4.0f, 100.0f);
+    glVertex3f( 100.0f, 4.0f, 100.0f);
+    glVertex3f( 100.0f, 4.0f, -100.0f);
+glEnd();
+
 drawMuseum();
 
 glFlush();
@@ -264,7 +282,7 @@ int main(int argc, char **argv)
 
 glutInit(&argc, argv);
 glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-glutInitWindowPosition(50,50);
+glutInitWindowPosition(100,100);
 glutInitWindowSize(800,600);
 glutCreateWindow("House 3D");
 
