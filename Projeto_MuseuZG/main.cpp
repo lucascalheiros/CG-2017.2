@@ -7,7 +7,7 @@
 float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
-float x = 0.0f, z = 7.0f;
+float x = 0.0f, z = 10.0f;
 
 // all variables initialized to 1.0, meaning
 // the triangle will initially be white
@@ -20,10 +20,10 @@ void init(void) {
     glClearColor(0.0, 0.0, 0.4, 0.1);
 }
 
-void drawMuseum()
-{
+void drawMuseum(){
 
 glColor3f(0.9f, 0.9f, 0.0f);
+glScalef(1.8f, 1.8f, 1.8f);
 
 // Front side
 glPushMatrix();
@@ -164,11 +164,9 @@ glColor3f(0.9f, 0.9f, 0.0f);
         glEnd();
     glPopMatrix();
 
-
-
 // Top
     glPushMatrix();
-        glColor3f(0.1f, 0.1f, 0.1f);
+        glColor3f(0.0f, 0.0f, 0.0f);
         glTranslatef(0.0f, 1.3f, 0.0f);
             glBegin(GL_QUADS);
                 glVertex3f(-2.0f, 0.7f, -10.0f);
@@ -178,6 +176,56 @@ glColor3f(0.9f, 0.9f, 0.0f);
             glEnd();
     glPopMatrix();
 }
+
+void drawPictures() {
+
+glTranslatef(0.0f, 1.3f, 0.0f);
+
+        glColor3f(1.0f, 0.0f, 0.1f);
+        glBegin(GL_QUADS);
+           glVertex3f(1.998, -0.0, -6.0);
+            glVertex3f(1.998, -0.0, -4.5);
+            glVertex3f(1.998, -1.0, -4.5);
+             glVertex3f(1.998, -1.0, -6.0);
+        glEnd();
+
+        glColor3f(9.0f, 0.0f, 0.9f);
+        glBegin(GL_QUADS);
+           glVertex3f(1.998, -0.3, -3.5);
+            glVertex3f(1.998, -0.3, -3.0);
+            glVertex3f(1.998, -0.8, -3.0);
+             glVertex3f(1.998, -0.8, -3.5);
+        glEnd();
+
+        glColor3f(0.9f, 0.0f, 0.0f);
+        glBegin(GL_QUADS);
+            glVertex3f(1.998, -0.3, -2.5);
+            glVertex3f(1.998, -0.3, -1.75);
+            glVertex3f(1.998, -0.8, -1.75);
+             glVertex3f(1.998, -0.8, -2.5);
+        glEnd();
+
+        glColor3f(0.9f, 0.0f, 0.9f);
+        glBegin(GL_QUADS);
+           glVertex3f(1.998, -0.3, -1.25);
+            glVertex3f(1.998, -0.3, -0.5);
+            glVertex3f(1.998, -0.8, -0.5);
+             glVertex3f(1.998, -0.8, -1.25);
+        glEnd();
+
+        glColor3f(0.0f, 0.9f, 0.0f);
+        glBegin(GL_QUADS);
+           glVertex3f(1.998, -0.3, 0.0);
+            glVertex3f(1.998, -0.3, 0.75);
+            glVertex3f(1.998, -0.8, 0.75);
+             glVertex3f(1.998, -0.8, 0.0);
+        glEnd();
+
+
+
+
+}
+
 
 void reshape(int w, int h)
 {
@@ -236,6 +284,7 @@ glColor3f(0.5f, 0.8f, 0.9f);
 glEnd();
 
 drawMuseum();
+drawPictures();
 
 glFlush();
 glutSwapBuffers();
