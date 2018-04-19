@@ -4,9 +4,10 @@
 #include <math.h>
 
 // actual vector representing the camera's direction
-float lx=0.0f,lz=-1.0f;
+float lx = 0.0f, lz = -1.0f;
+
 // XZ position of the camera
-float x=0.0f,z=6.0f;
+float x = 0.0f, z = 7.0f;
 
 // all variables initialized to 1.0, meaning
 // the triangle will initially be white
@@ -107,10 +108,10 @@ glColor3f(0.9f, 0.9f, 0.0f);
     glPushMatrix();
         glTranslatef(0.0f, 1.3f, 0.0f);
         glBegin(GL_QUADS);  // Wall
-            glVertex3f(-2,0.7,-1);
-            glVertex3f(2,0.7,-2);
-            glVertex3f(2,-1.5,-2);
-            glVertex3f(-2,-1.5,-1);
+            glVertex3f(-2,0.7,-3);
+            glVertex3f(2,0.7,-3);
+            glVertex3f(2,-1.5,-3);
+            glVertex3f(-2,-1.5,-3);
         glEnd();
     glPopMatrix();
 
@@ -122,25 +123,32 @@ glColor3f(0.9f, 0.9f, 0.0f);
         glTranslatef(0.0f, 1.3f, 0.0f);
 
         glBegin(GL_QUADS);  // Wall
-            glVertex3f(2,0.7,1);
-            glVertex3f(2,0.7,-2);
-            glVertex3f(2,-1.5,-2);
-            glVertex3f(2,-1.5,1);
+            glVertex3f(2, 0.7, 1);
+            glVertex3f(2, 0.7, -3);
+            glVertex3f(2, -1.5, -3);
+            glVertex3f(2, -1.5, 1);
         glEnd();
 
         glColor3f(0.9f, 0.9f, 0.9f);
-        glBegin(GL_QUADS);  // Window Left
-            glVertex3f(1,0.3, 1.0);
-            glVertex3f(1,0.3, -1.5);
-            glVertex3f(1,-0.8, -1.5);
-             glVertex3f(1,-0.8, 1.0);
+        glBegin(GL_QUADS);  // Window Right
+            glVertex3f(2.0001, -0.3, -2.5);
+            glVertex3f(2.0001, -0.3, -1.75);
+            glVertex3f(2.0001, -0.8, -1.75);
+             glVertex3f(2.0001, -0.8, -2.5);
         glEnd();
 
-        glBegin(GL_QUADS);  // Window Right
-           glVertex3f(1.5,-0.3,-1.0001);
-            glVertex3f(0.75,-0.3,-1.0001);
-            glVertex3f(0.75,-0.8,-1.0001);
-            glVertex3f(1.5,-0.8,-1.0001);
+        glBegin(GL_QUADS);  // Window Middle
+           glVertex3f(2.0001, -0.3, -1.25);
+            glVertex3f(2.0001, -0.3, -0.5);
+            glVertex3f(2.0001, -0.8, -0.5);
+             glVertex3f(2.0001, -0.8, -1.25);
+        glEnd();
+
+        glBegin(GL_QUADS);  // Window Left
+           glVertex3f(2.0001, -0.3, 0.0);
+            glVertex3f(2.0001, -0.3, 0.75);
+            glVertex3f(2.0001, -0.8, 0.75);
+             glVertex3f(2.0001, -0.8, 0.0);
         glEnd();
 
     glPopMatrix();
@@ -154,21 +162,21 @@ glColor3f(0.9f, 0.9f, 0.0f);
 
         glBegin(GL_QUADS);  // Wall
             glVertex3f(-2,0.7,1);
-            glVertex3f(-2,0.7,-1);
-            glVertex3f(-2,-1.5,-1);
+            glVertex3f(-2,0.7,-3);
+            glVertex3f(-2,-1.5,-3);
             glVertex3f(-2,-1.5,1);
         glEnd();
 
     glPopMatrix();
 }
 
-void changeSize(int w, int h)
+void reshape(int w, int h)
 {
 
 // Prevent a divide by zero, when window is too short
 // (you cant make a window of zero width).
-if (h == 0)
-h = 1;
+if (h == 0) h = 1;
+
 float ratio = w * 1.0 / h;
 
 // Use the Projection Matrix
@@ -191,13 +199,14 @@ void renderScene(void)
 {
 
 // Clear Color and Depth Buffers
-
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 // Reset transformations
 glLoadIdentity();
 // Set the camera
 gluLookAt(x, 1.0f, z, x+lx, 1.0f, z+lz, 0.0f, 1.0f, 0.0f);
+
+//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 // Draw ground
 glColor3f(0.0f, 0.3f, 0.3f);
@@ -208,50 +217,44 @@ glColor3f(0.0f, 0.3f, 0.3f);
     glVertex3f( 100.0f, 0.0f, -100.0f);
 glEnd();
 
-
-// Draw 36 SnowMen
-//for(int i = -3; i < 3; i++)
-//for(int j=-3; j < 3; j++) {
-//glPushMatrix();
-//glTranslatef(i*10.0,0,j * 10.0);
 drawMuseum();
-//glPopMatrix();
-//}
 
+glFlush();
 glutSwapBuffers();
 }
 
-void processNormalKeys(unsigned char key, int x, int y)
-{
+void processNormalKeys(unsigned char key, int x, int y) {
     if (key == 27)
     exit(0);
 }
 
-void processSpecialKeys(int key, int xx, int yy)
-{
+void processSpecialKeys(int key, int xx, int yy) {
 
-float fraction = 0.5f;
+    float fraction = 0.5f;
 
-switch (key) {
-case GLUT_KEY_LEFT :
-angle -= 0.05f;
-lx = sin(angle);
-lz = -cos(angle);
-break;
-case GLUT_KEY_RIGHT :
-angle += 0.05f;
-lx = sin(angle);
-lz = -cos(angle);
-break;
-case GLUT_KEY_UP :
-x += lx * fraction;
-z += lz * fraction;
-break;
-case GLUT_KEY_DOWN :
-x -= lx * fraction;
-z -= lz * fraction;
-break;
-}
+    switch (key) {
+        case GLUT_KEY_LEFT :
+            angle -= 0.05f;
+            lx = sin(angle);
+            lz = -cos(angle);
+        break;
+
+        case GLUT_KEY_RIGHT :
+            angle += 0.05f;
+            lx = sin(angle);
+            lz = -cos(angle);
+        break;
+
+        case GLUT_KEY_UP :
+            x += lx * fraction;
+            z += lz * fraction;
+        break;
+
+        case GLUT_KEY_DOWN :
+            x -= lx * fraction;
+            z -= lz * fraction;
+        break;
+    }
 }
 
 int main(int argc, char **argv)
@@ -269,7 +272,7 @@ init();
 
 // register callbacks
 glutDisplayFunc(renderScene);
-glutReshapeFunc(changeSize);
+glutReshapeFunc(reshape);
 glutIdleFunc(renderScene);
 glutKeyboardFunc(processNormalKeys);
 glutSpecialFunc(processSpecialKeys);
