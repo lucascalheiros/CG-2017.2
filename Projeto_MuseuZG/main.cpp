@@ -9,9 +9,10 @@ float lx = 0.0f, lz = -1.0f;
 // XZ position of the camera
 float x = 0.0f, z = 10.0f;
 
-// all variables initialized to 1.0, meaning
-// the triangle will initially be white
-float red=1.0f, blue=1.0f, green=1.0f;
+float right_door_pivot[] = {0.0f, 1.3f, 0.0f};
+float left_door_pivot[] = {-4.0f, 1.25f, -13.55f};
+
+float door_angle = -50.0f;
 
 // angle for rotating triangle
 float angle = 0.0f;
@@ -78,28 +79,9 @@ glPushMatrix();
         glEnd();
 
 
-        glColor3f(1.0f, 1.0f, 1.0f);
 
-        glBegin(GL_QUADS);  // Door
-            glVertex3f(-0.3,-0.4,1.0001);
-            glVertex3f(0.3,-0.4,1.0001);
-            glVertex3f(0.3,-1.5,1.0001);
-            glVertex3f(-0.3,-1.5,1.0001);
-        glEnd();
 
-        glBegin(GL_QUADS);  // Window Left
-            glVertex3f(-1.5,-0.3,1.0001);
-            glVertex3f(-0.75,-0.3,1.0001);
-            glVertex3f(-0.75,-0.8,1.0001);
-            glVertex3f(-1.5,-0.8,1.0001);
-        glEnd();
 
-        glBegin(GL_QUADS);  // Window Right
-            glVertex3f(1.5,-0.3,1.0001);
-            glVertex3f(0.75,-0.3,1.0001);
-            glVertex3f(0.75,-0.8,1.0001);
-            glVertex3f(1.5,-0.8,1.0001);
-        glEnd();
     glPopMatrix();
 
 glColor3f(0.9f, 0.9f, 0.0f);
@@ -132,22 +114,22 @@ glColor3f(0.9f, 0.9f, 0.0f);
         glBegin(GL_QUADS);  // Window Right
             glVertex3f(2.0001, -0.3, -2.5);
             glVertex3f(2.0001, -0.3, -1.75);
-            glVertex3f(2.0001, -0.8, -1.75);
-             glVertex3f(2.0001, -0.8, -2.5);
+            glVertex3f(2.0001, -0.3 - 0.5, -1.75);
+             glVertex3f(2.0001, -0.3 - 0.5, -2.5);
         glEnd();
 
         glBegin(GL_QUADS);  // Window Middle
            glVertex3f(2.0001, -0.3, -1.25);
             glVertex3f(2.0001, -0.3, -0.5);
-            glVertex3f(2.0001, -0.8, -0.5);
-             glVertex3f(2.0001, -0.8, -1.25);
+            glVertex3f(2.0001, -0.3 - 0.5, -0.5);
+             glVertex3f(2.0001, -0.3 - 0.5, -1.25);
         glEnd();
 
         glBegin(GL_QUADS);  // Window Left
            glVertex3f(2.0001, -0.3, 0.0);
             glVertex3f(2.0001, -0.3, 0.75);
-            glVertex3f(2.0001, -0.8, 0.75);
-             glVertex3f(2.0001, -0.8, 0.0);
+            glVertex3f(2.0001, -0.3 - 0.5, 0.75);
+             glVertex3f(2.0001, -0.3 - 0.5, 0.0);
         glEnd();
     glPopMatrix();
 
@@ -177,55 +159,149 @@ glColor3f(0.9f, 0.9f, 0.0f);
     glPopMatrix();
 }
 
-void drawPictures() {
+void drawPictures(float x, float y) {
 
 glTranslatef(0.0f, 1.3f, 0.0f);
 
         glColor3f(1.0f, 0.0f, 0.1f);
         glBegin(GL_QUADS);
-           glVertex3f(1.998, -0.0, -6.0);
-            glVertex3f(1.998, -0.0, -4.5);
-            glVertex3f(1.998, -1.0, -4.5);
-             glVertex3f(1.998, -1.0, -6.0);
+           glVertex3f(x, y + 0.1, -6.0);
+            glVertex3f(x, y + 0.1, -4.5);
+            glVertex3f(x, y - 0.6, -4.5);
+             glVertex3f(x, y - 0.6, -6.0);
         glEnd();
 
         glColor3f(9.0f, 0.0f, 0.9f);
         glBegin(GL_QUADS);
-           glVertex3f(1.998, -0.3, -3.5);
-            glVertex3f(1.998, -0.3, -3.0);
-            glVertex3f(1.998, -0.8, -3.0);
-             glVertex3f(1.998, -0.8, -3.5);
+           glVertex3f(x, y, -3.5);
+            glVertex3f(x, y, -3.0);
+            glVertex3f(x, y - 0.5, -3.0);
+             glVertex3f(x, y -0.5, -3.5);
         glEnd();
 
         glColor3f(0.9f, 0.0f, 0.0f);
         glBegin(GL_QUADS);
-            glVertex3f(1.998, -0.3, -2.5);
-            glVertex3f(1.998, -0.3, -1.75);
-            glVertex3f(1.998, -0.8, -1.75);
-             glVertex3f(1.998, -0.8, -2.5);
+            glVertex3f(x, y, -2.5);
+            glVertex3f(x, y, -1.75);
+            glVertex3f(x, y - 0.5, -1.75);
+             glVertex3f(x, y - 0.5, -2.5);
         glEnd();
 
         glColor3f(0.9f, 0.0f, 0.9f);
         glBegin(GL_QUADS);
-           glVertex3f(1.998, -0.3, -1.25);
-            glVertex3f(1.998, -0.3, -0.5);
-            glVertex3f(1.998, -0.8, -0.5);
-             glVertex3f(1.998, -0.8, -1.25);
+           glVertex3f(x, y, -1.25);
+            glVertex3f(x, y, -0.5);
+            glVertex3f(x, y - 0.5, -0.5);
+             glVertex3f(x, y - 0.5, -1.25);
         glEnd();
 
         glColor3f(0.0f, 0.9f, 0.0f);
         glBegin(GL_QUADS);
-           glVertex3f(1.998, -0.3, 0.0);
-            glVertex3f(1.998, -0.3, 0.75);
-            glVertex3f(1.998, -0.8, 0.75);
-             glVertex3f(1.998, -0.8, 0.0);
+           glVertex3f(x, y, 0.0);
+            glVertex3f(x, y, 0.75);
+            glVertex3f(x, y - 0.5, 0.75);
+             glVertex3f(x, y - 0.5, 0.0);
         glEnd();
+}
 
 
+void drawDoor() {
 
+    //glPushMatrix();
+
+    //glPopMatrix();
+
+//    glPushMatrix();
+//    glTranslatef(0.0f, 1.3f, 0.0f);
+//        glRotatef (door_angle, 0,1,0);
+//        //glTranslatef (0.0f, 1.3f, 0.0f);
+//        glColor3f(1.0f, 1.0f, 1.0f);
+//        glBegin(GL_QUADS);  // Door
+//            glVertex3f(-0.3,-0.4,1.0001);
+//            glVertex3f(0.3,-0.4,1.0001);
+//            glVertex3f(0.3,-1.5,1.0001);
+//            glVertex3f(-0.3,-1.5,1.0001);
+//        glEnd();
+//    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.0f, 0.3f, -0.1f);
+    glTranslatef(0.0f, 0.3f, 1.5f);
+        glRotatef (door_angle, 0,1,0);
+        //glTranslatef (0.3f, 0.0f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glScalef(0.7, 1.1, 0.1f);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+//    glColor3f(1.0f,1.0f,0.0f);
+//
+//    glPushMatrix();
+//
+//        glTranslatef(right_door_pivot[0], right_door_pivot[1], right_door_pivot[2]);
+//        glRotatef(right_door_angle, 0, 1, 0);
+//        //glTranslatef(-0.5f, 0.0f, 0.0f);
+//        //glScalef(1.0, 2.5, 0.1f);
+//        glutSolidCube(1.0);
+//    glPopMatrix();
+
+//    glPushMatrix();
+//        glColor3f(1.0f,1.0f,0.0f);
+//        glTranslatef(left_door_pivot[0], left_door_pivot[1], left_door_pivot[2]);
+//        glRotatef(left_door_angle, 0, 1, 0);
+//        glTranslatef(+0.5f, 0.0f, 0.0f);
+//        //glScalef(1.0, 2.5, 0.1f);
+//        glutSolidCube(1.0);
+//    glPopMatrix();
 
 }
 
+void drawWindows() {
+
+    glPushMatrix();
+
+        glTranslatef(0.0f, 1.3f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
+
+        // Front side
+         glBegin(GL_QUADS);  // Window Left
+            glVertex3f(-1.5,-0.3,1.0001);
+            glVertex3f(-0.75,-0.3,1.0001);
+            glVertex3f(-0.75,-0.3 - 0.5,1.0001);
+            glVertex3f(-1.5,-0.3 - 0.5,1.0001);
+        glEnd();
+
+        glBegin(GL_QUADS);  // Window Right
+            glVertex3f(1.5,-0.3,1.0001);
+            glVertex3f(0.75,-0.3,1.0001);
+            glVertex3f(0.75,-0.3 - 0.5,1.0001);
+            glVertex3f(1.5,-0.3 - 0.5,1.0001);
+        glEnd();
+
+        //Right side
+        glBegin(GL_QUADS);  // Window Right
+            glVertex3f(2.0001, -0.3, -2.5);
+            glVertex3f(2.0001, -0.3, -1.75);
+            glVertex3f(2.0001, -0.3 - 0.5, -1.75);
+             glVertex3f(2.0001, -0.3 - 0.5, -2.5);
+        glEnd();
+
+        glBegin(GL_QUADS);  // Window Middle
+           glVertex3f(2.0001, -0.3, -1.25);
+            glVertex3f(2.0001, -0.3, -0.5);
+            glVertex3f(2.0001, -0.3 - 0.5, -0.5);
+             glVertex3f(2.0001, -0.3 - 0.5, -1.25);
+        glEnd();
+
+        glBegin(GL_QUADS);  // Window Left
+           glVertex3f(2.0001, -0.3, 0.0);
+            glVertex3f(2.0001, -0.3, 0.75);
+            glVertex3f(2.0001, -0.3 - 0.5, 0.75);
+             glVertex3f(2.0001, -0.3 - 0.5, 0.0);
+        glEnd();
+
+    glPopMatrix();
+}
 
 void reshape(int w, int h)
 {
@@ -255,6 +331,8 @@ glMatrixMode(GL_MODELVIEW);
 void renderScene(void)
 {
 
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 // Clear Color and Depth Buffers
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -263,7 +341,7 @@ glLoadIdentity();
 // Set the camera
 gluLookAt(x, 1.0f, z, x+lx, 1.0f, z+lz, 0.0f, 1.0f, 0.0f);
 
-//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 
 // Draw ground
 glColor3f(0.0f, 0.3f, 0.3f);
@@ -284,14 +362,30 @@ glColor3f(0.5f, 0.8f, 0.9f);
 glEnd();
 
 drawMuseum();
-drawPictures();
+drawDoor();
+drawWindows();
+drawPictures(1.998, -0.3);
 
 glFlush();
 glutSwapBuffers();
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
-    if (key == 27)
+    switch(key){
+        case 'o':
+        door_angle+=1.0f;
+        glutPostRedisplay();
+        break;
+
+        case 'c':
+        door_angle -=1.0f;
+        glutPostRedisplay();
+        break;
+
+        case 27:
+        exit(0);
+        break;
+    }
     exit(0);
 }
 
@@ -333,7 +427,7 @@ glutInit(&argc, argv);
 glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 glutInitWindowPosition(100,100);
 glutInitWindowSize(800,600);
-glutCreateWindow("House 3D");
+glutCreateWindow("Museum ZG");
 
 init();
 
