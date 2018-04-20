@@ -13,7 +13,7 @@ float x = -0.8f, z =-5.0f;
 float right_door_pivot[] = {0.0f, -1.3f, 0.0f};
 float left_door_pivot[] = {-4.0f, 1.25f, -13.55f};
 
-float door_angle = -50.0f;
+float door_angle = 0;
 
 // angle for rotating triangle
 float angle = 0.0f;
@@ -32,12 +32,27 @@ glPushMatrix();
 
         glTranslatef(0.0f, 1.3f, 0.0f);
 
-        glBegin(GL_QUADS);  // Wall
-            glVertex3f(-2, 0, 1);
+       glBegin(GL_QUADS);  // Wall
+            glVertex3f(0.3, 0, 1);
             glVertex3f(2, 0, 1);
             glVertex3f(2, -1.5, 1);
-            glVertex3f(-2,-1.5, 1);
+            glVertex3f(0.3,-1.5, 1);
         glEnd();
+
+        glBegin(GL_QUADS);  // Wall
+			glVertex3f(-2, 0, 1);
+			glVertex3f(-0.3, 0, 1);
+			glVertex3f(-0.3, -1.5, 1);
+			glVertex3f(-2,-1.5, 1);
+		glEnd();
+    
+		glBegin(GL_QUADS);  // Wall
+			glVertex3f(0.3, 0, 1);
+			glVertex3f(-0.3, 0, 1);
+			glVertex3f(-0.3, -0.25, 1);
+			glVertex3f(0.3,-0.25, 1);
+		glEnd();
+
 
         glColor3f(0.9f, 0.9f, 0.9f);
         glBegin(GL_QUADS);  // Roof
@@ -221,12 +236,14 @@ void drawDoor() {
 //    glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(0.0f, 0.5f, 1.3f);
+		glTranslatef(-0.3f, 0.5f, 1);
         glRotatef (door_angle, 0,1,0);
+    	glTranslatef(0.3f, 0, 0);
         glColor3f(1.0f, 1.0f, 1.0f);
-        glScalef(0.7, 1.1, 0.1f);
+        glScalef(0.6, 1.1, 0.1f);
         glutSolidCube(1.0);
     glPopMatrix();
+
 
 
 //    glColor3f(1.0f,1.0f,0.0f);
@@ -532,7 +549,6 @@ void processNormalKeys(unsigned char key, int x, int y) {
         exit(0);
         break;
     }
-    exit(0);
 }
 
 void processSpecialKeys(int key, int xx, int yy) {
