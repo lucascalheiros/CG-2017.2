@@ -342,7 +342,6 @@ void drawBank(GLfloat z) {
 
 void drawChair(GLfloat z) {
 
-
     //acento
     glPushMatrix();
         glTranslatef(-1.2f, -1.0f, 0.2f);
@@ -382,13 +381,56 @@ void drawChair(GLfloat z) {
 
     // encosto
     glPushMatrix();
-        glTranslatef(-1.2f, -1.0f, 0.1f);
+        glTranslatef(-1.2f, -1.0f, 0.15f);
         glRotatef(90.0f, 1, 0, 0);
         glTranslatef(0.0f, 0.28f, -0.25f);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.5, 0.1, 0.6);
+        glScalef(0.5, 0.05, 0.6);
         glutSolidCube(1.0);
     glPopMatrix();
+
+}
+
+void drawTable(GLfloat z) {
+
+    // tampo
+    glPushMatrix();
+        glTranslatef(-1.2f, -0.75f, -0.6f + z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.7, 0.05, 0.7);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //pés
+    glPushMatrix();
+        glTranslatef(-1.4f, -1.5f, -0.4f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.05, 1.5, 0.05);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.0f, -1.5f, -0.4f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.05, 1.5, 0.05);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.0f, -1.5f, -0.8f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.05, 1.5, 0.05);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+     glPushMatrix();
+        glTranslatef(-1.4f, -1.5f, -0.8f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.05, 1.5, 0.05);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+
 
 }
 
@@ -457,6 +499,7 @@ drawWindows();
 drawPictures(1.998, -0.3);
 drawBank(-2.0f);
 drawChair(0.0f);
+drawTable(0.0f);
 
 glFlush();
 glutSwapBuffers();
