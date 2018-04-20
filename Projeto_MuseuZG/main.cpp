@@ -7,9 +7,10 @@
 float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
-float x = 0.0f, z = 10.0f;
+//float x = 0.0f, z = 10.0f;
+float x = -0.8f, z =-5.0f;
 
-float right_door_pivot[] = {0.0f, 1.3f, 0.0f};
+float right_door_pivot[] = {0.0f, -1.3f, 0.0f};
 float left_door_pivot[] = {-4.0f, 1.25f, -13.55f};
 
 float door_angle = -50.0f;
@@ -77,11 +78,6 @@ glPushMatrix();
             glVertex3f(2,0.1, 1);
             glVertex3f(-2,0.1, 1);
         glEnd();
-
-
-
-
-
     glPopMatrix();
 
 glColor3f(0.9f, 0.9f, 0.0f);
@@ -225,14 +221,13 @@ void drawDoor() {
 //    glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(0.0f, 0.3f, -0.1f);
-    glTranslatef(0.0f, 0.3f, 1.5f);
+        glTranslatef(0.0f, 0.5f, 1.3f);
         glRotatef (door_angle, 0,1,0);
-        //glTranslatef (0.3f, 0.0f, 0.0f);
         glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.7, 1.1, 0.1f);
         glutSolidCube(1.0);
     glPopMatrix();
+
 
 //    glColor3f(1.0f,1.0f,0.0f);
 //
@@ -303,6 +298,49 @@ void drawWindows() {
     glPopMatrix();
 }
 
+
+void drawBank() {
+
+    //acento
+    glPushMatrix();
+        glTranslatef(-1.5f, -1.0f, -0.6f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.5, 0.1, 1.0);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //pés
+    glPushMatrix();
+        glTranslatef(-1.6f, -1.5f, -0.3f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.4f, -1.5f, -0.3f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.4f, -1.5f, -0.9f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+     glPushMatrix();
+        glTranslatef(-1.6f, -1.5f, -0.9f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+}
+
+
 void reshape(int w, int h)
 {
 
@@ -365,6 +403,7 @@ drawMuseum();
 drawDoor();
 drawWindows();
 drawPictures(1.998, -0.3);
+drawBank();
 
 glFlush();
 glutSwapBuffers();
@@ -373,12 +412,12 @@ glutSwapBuffers();
 void processNormalKeys(unsigned char key, int x, int y) {
     switch(key){
         case 'o':
-        door_angle+=1.0f;
+        door_angle += 1.0f;
         glutPostRedisplay();
         break;
 
         case 'c':
-        door_angle -=1.0f;
+        door_angle -= 1.0f;
         glutPostRedisplay();
         break;
 
