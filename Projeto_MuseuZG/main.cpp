@@ -298,6 +298,16 @@ void drawWindows() {
     glPopMatrix();
 }
 
+void drawInternPartition () {
+
+    glPushMatrix();
+        glTranslatef(-0.3f, -1.2f, -10.0f);
+        glColor3f(0.7f, 0.9f, 0.7f);
+        glScalef(0.1, 2.5, 12.0);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+}
 
 void drawBank(GLfloat z) {
 
@@ -336,7 +346,7 @@ void drawBank(GLfloat z) {
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
-    glPopMatrix();
+     glPopMatrix();
 
 }
 
@@ -500,6 +510,7 @@ drawPictures(1.998, -0.3);
 drawBank(-2.0f);
 drawChair(0.0f);
 drawTable(0.0f);
+drawInternPartition();
 
 glFlush();
 glutSwapBuffers();
