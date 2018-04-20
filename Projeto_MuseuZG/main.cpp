@@ -299,11 +299,11 @@ void drawWindows() {
 }
 
 
-void drawBank() {
+void drawBank(GLfloat z) {
 
     //acento
     glPushMatrix();
-        glTranslatef(-1.5f, -1.0f, -0.6f);
+        glTranslatef(-1.5f, -1.0f, -0.6f + z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.5, 0.1, 1.0);
         glutSolidCube(1.0);
@@ -311,30 +311,82 @@ void drawBank() {
 
     //pés
     glPushMatrix();
-        glTranslatef(-1.6f, -1.5f, -0.3f);
+        glTranslatef(-1.6f, -1.5f, -0.3f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.4f, -1.5f, -0.3f);
+        glTranslatef(-1.4f, -1.5f, -0.3f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.4f, -1.5f, -0.9f);
+        glTranslatef(-1.4f, -1.5f, -0.9f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
      glPushMatrix();
-        glTranslatef(-1.6f, -1.5f, -0.9f);
+        glTranslatef(-1.6f, -1.5f, -0.9f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+}
+
+void drawChair(GLfloat z) {
+
+
+    //acento
+    glPushMatrix();
+        glTranslatef(-1.2f, -1.0f, 0.2f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.5, 0.1, 0.46);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //pés
+    glPushMatrix();
+        glTranslatef(-1.35f, -1.5f, 0.38f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.05f, -1.5f, 0.38f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.05f, -1.5f, 0.1f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+     glPushMatrix();
+        glTranslatef(-1.35f, -1.5f, 0.1f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.1, 1.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // encosto
+    glPushMatrix();
+        glTranslatef(-1.2f, -1.0f, 0.1f);
+        glRotatef(90.0f, 1, 0, 0);
+        glTranslatef(0.0f, 0.28f, -0.25f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.5, 0.1, 0.6);
         glutSolidCube(1.0);
     glPopMatrix();
 
@@ -403,7 +455,8 @@ drawMuseum();
 drawDoor();
 drawWindows();
 drawPictures(1.998, -0.3);
-drawBank();
+drawBank(-2.0f);
+drawChair(0.0f);
 
 glFlush();
 glutSwapBuffers();
