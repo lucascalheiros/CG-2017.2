@@ -8,7 +8,7 @@ float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
 //float x = 0.0f, z = 10.0f;
-float x = -0.8f, z =-5.0f;
+float x = -0.8f, z =-12.0f;
 
 float door_angle = 0.0f;
 
@@ -298,12 +298,53 @@ void drawWindows() {
     glPopMatrix();
 }
 
-void drawInternPartition () {
+void drawInternWalls() {
 
+    // divisory
+     glPushMatrix();
+        glTranslatef(1.189f, -1.2f, -6.5f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(1.6, 2.5, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // small
     glPushMatrix();
-        glTranslatef(-0.3f, -1.2f, -10.0f);
-        glColor3f(0.7f, 0.9f, 0.7f);
-        glScalef(0.1, 2.5, 12.0);
+        glTranslatef(-0.4f, -1.2f, -9.73f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(0.1, 4.0, 0.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // small2
+    glPushMatrix();
+        glTranslatef(0.4f, -1.2f, -6.7f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(0.1, 2.5, 0.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // small3
+    glPushMatrix();
+        glTranslatef(-0.4f, -1.2f, -6.7f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(0.1, 4.0, 0.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // divisory2
+    glPushMatrix();
+        glTranslatef(-0.7f, -1.2f, -6.5f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(0.7, 4.0, 0.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // divisory3
+    glPushMatrix();
+        glTranslatef(-1.0f, -1.2f, -4.0f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(0.1, 4.0, 5.0);
         glutSolidCube(1.0);
     glPopMatrix();
 
@@ -444,6 +485,11 @@ void drawTable(GLfloat z) {
 
 }
 
+void drawAirConditioning() {
+
+
+
+}
 
 void reshape(int w, int h)
 {
@@ -495,7 +541,7 @@ drawPictures(1.998, -0.3);
 drawBank(-2.0f);
 drawChair(0.0f);
 drawTable(0.0f);
-drawInternPartition();
+drawInternWalls();
 
 glFlush();
 glutSwapBuffers();
@@ -504,24 +550,24 @@ glutSwapBuffers();
 void processNormalKeys(unsigned char key, int x, int y) {
     switch(key){
         case 'o':
-        if(door_angle <= 118.0f) door_angle += 2.0f;
-        glutPostRedisplay();
+            if(door_angle <= 118.0f) door_angle += 2.0f;
+            glutPostRedisplay();
         break;
 
         case 'c':
-        if(door_angle >= 2.0f) door_angle -= 2.0f;
-        glutPostRedisplay();
+            if(door_angle >= 2.0f) door_angle -= 2.0f;
+            glutPostRedisplay();
         break;
 
         case 27:
-        exit(0);
+            exit(0);
         break;
     }
 }
 
 void processSpecialKeys(int key, int xx, int yy) {
 
-    float fraction = 0.5f;
+    float fraction = 0.9f;
 
     switch (key) {
         case GLUT_KEY_LEFT :
