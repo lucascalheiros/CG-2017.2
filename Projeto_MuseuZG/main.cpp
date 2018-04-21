@@ -10,16 +10,39 @@ float lx = 0.0f, lz = -1.0f;
 //float x = 0.0f, z = 10.0f;
 float x = -0.8f, z =-5.0f;
 
-float right_door_pivot[] = {0.0f, -1.3f, 0.0f};
-float left_door_pivot[] = {-4.0f, 1.25f, -13.55f};
-
-float door_angle = 0;
+float door_angle = 0.0f;
 
 // angle for rotating triangle
 float angle = 0.0f;
 
 void init(void) {
     glClearColor(0.0, 0.0, 0.4, 0.1);
+}
+
+void drawGround() {
+
+    // Draw ground
+    glColor3f(0.0f, 0.3f, 0.3f);
+        glBegin(GL_QUADS);
+        glVertex3f(-100.0f, 0.0f, -100.0f);
+        glVertex3f(-100.0f, 0.0f, 100.0f);
+        glVertex3f( 100.0f, 0.0f, 100.0f);
+        glVertex3f( 100.0f, 0.0f, -100.0f);
+    glEnd();
+
+}
+
+void drawSky() {
+
+    // Draw sky
+    glColor3f(0.5f, 0.8f, 0.9f);
+    glBegin(GL_QUADS);
+        glVertex3f(-100.0f, 4.0f, -100.0f);
+        glVertex3f(-100.0f, 4.0f, 100.0f);
+        glVertex3f( 100.0f, 4.0f, 100.0f);
+        glVertex3f( 100.0f, 4.0f, -100.0f);
+    glEnd();
+
 }
 
 void drawMuseum(){
@@ -45,7 +68,7 @@ glPushMatrix();
 			glVertex3f(-0.3, -1.5, 1);
 			glVertex3f(-2,-1.5, 1);
 		glEnd();
-    
+
 		glBegin(GL_QUADS);  // Wall
 			glVertex3f(0.3, 0, 1);
 			glVertex3f(-0.3, 0, 1);
@@ -215,25 +238,7 @@ glTranslatef(0.0f, 1.3f, 0.0f);
         glEnd();
 }
 
-
 void drawDoor() {
-
-    //glPushMatrix();
-
-    //glPopMatrix();
-
-//    glPushMatrix();
-//    glTranslatef(0.0f, 1.3f, 0.0f);
-//        glRotatef (door_angle, 0,1,0);
-//        //glTranslatef (0.0f, 1.3f, 0.0f);
-//        glColor3f(1.0f, 1.0f, 1.0f);
-//        glBegin(GL_QUADS);  // Door
-//            glVertex3f(-0.3,-0.4,1.0001);
-//            glVertex3f(0.3,-0.4,1.0001);
-//            glVertex3f(0.3,-1.5,1.0001);
-//            glVertex3f(-0.3,-1.5,1.0001);
-//        glEnd();
-//    glPopMatrix();
 
     glPushMatrix();
 		glTranslatef(-0.3f, 0.5f, 1);
@@ -243,28 +248,6 @@ void drawDoor() {
         glScalef(0.6, 1.1, 0.1f);
         glutSolidCube(1.0);
     glPopMatrix();
-
-
-
-//    glColor3f(1.0f,1.0f,0.0f);
-//
-//    glPushMatrix();
-//
-//        glTranslatef(right_door_pivot[0], right_door_pivot[1], right_door_pivot[2]);
-//        glRotatef(right_door_angle, 0, 1, 0);
-//        //glTranslatef(-0.5f, 0.0f, 0.0f);
-//        //glScalef(1.0, 2.5, 0.1f);
-//        glutSolidCube(1.0);
-//    glPopMatrix();
-
-//    glPushMatrix();
-//        glColor3f(1.0f,1.0f,0.0f);
-//        glTranslatef(left_door_pivot[0], left_door_pivot[1], left_door_pivot[2]);
-//        glRotatef(left_door_angle, 0, 1, 0);
-//        glTranslatef(+0.5f, 0.0f, 0.0f);
-//        //glScalef(1.0, 2.5, 0.1f);
-//        glutSolidCube(1.0);
-//    glPopMatrix();
 
 }
 
@@ -501,26 +484,11 @@ glLoadIdentity();
 gluLookAt(x, 1.0f, z, x+lx, 1.0f, z+lz, 0.0f, 1.0f, 0.0f);
 
 
-
-// Draw ground
-glColor3f(0.0f, 0.3f, 0.3f);
-    glBegin(GL_QUADS);
-    glVertex3f(-100.0f, 0.0f, -100.0f);
-    glVertex3f(-100.0f, 0.0f, 100.0f);
-    glVertex3f( 100.0f, 0.0f, 100.0f);
-    glVertex3f( 100.0f, 0.0f, -100.0f);
-glEnd();
-
-// Draw sky
-glColor3f(0.5f, 0.8f, 0.9f);
-    glBegin(GL_QUADS);
-    glVertex3f(-100.0f, 4.0f, -100.0f);
-    glVertex3f(-100.0f, 4.0f, 100.0f);
-    glVertex3f( 100.0f, 4.0f, 100.0f);
-    glVertex3f( 100.0f, 4.0f, -100.0f);
-glEnd();
+drawGround();
+drawSky();
 
 drawMuseum();
+
 drawDoor();
 drawWindows();
 drawPictures(1.998, -0.3);
@@ -536,12 +504,12 @@ glutSwapBuffers();
 void processNormalKeys(unsigned char key, int x, int y) {
     switch(key){
         case 'o':
-        door_angle += 1.0f;
+        if(door_angle <= 118.0f) door_angle += 2.0f;
         glutPostRedisplay();
         break;
 
         case 'c':
-        door_angle -= 1.0f;
+        if(door_angle >= 2.0f) door_angle -= 2.0f;
         glutPostRedisplay();
         break;
 
