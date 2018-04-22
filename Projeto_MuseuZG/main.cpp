@@ -8,7 +8,7 @@ float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
 //float x = 0.0f, z = 10.0f;
-float x = -0.8f, z =-15.0f;
+float x = -0.8f, z =-5.0f;
 
 float door_angle = 0.0f;
 
@@ -548,6 +548,23 @@ void drawAirConditioning(GLfloat x, GLfloat z) {
 
 }
 
+void drawTV (GLfloat x, GLfloat y, GLfloat z) {
+
+    glPushMatrix();
+        glTranslatef(-1.05f+ x, -0.60f + y, -1.0f + z);
+        glColor3f(0.1f, 0.1f, 0.0f);
+        glScalef(0.05, 0.3, 0.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.059f+ x, -0.60f + y, -1.02f + z);
+        glColor3f(0.2f, 0.2f, 0.2f);
+        glScalef(0.04, 0.25, 0.4);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+}
 
 void reshape(int w, int h)
 {
@@ -605,6 +622,8 @@ drawRack(0.05f, 0.6f, 0.0f);
 drawAirConditioning(0.0f, 0.0f);
 drawAirConditioning(0.0f, 4.0f);
 drawAirConditioning(-3.6f, 4.0f);
+
+drawTV(0.0f, 0.0f, 0.0f);
 
 drawInternWalls();
 
