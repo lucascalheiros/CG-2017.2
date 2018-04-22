@@ -536,11 +536,18 @@ void drawRack(GLfloat x, GLfloat y, GLfloat z) {
 
 }
 
-void drawAirConditioning() {
+void drawAirConditioning(GLfloat x, GLfloat z) {
 
+    glPushMatrix();
+        glTranslatef(1.8f+ x, 0.40f, -7.5f+ z);
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glScalef(0.3, 0.15, 0.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
 
 
 }
+
 
 void reshape(int w, int h)
 {
@@ -593,8 +600,11 @@ drawBank(0.8f, -2.0f);
 drawBank(0.8f, -4.0f);
 drawChair(2.5f, 0.5f);
 drawTable(2.5f, 0.8f);
-
 drawRack(0.05f, 0.6f, 0.0f);
+
+drawAirConditioning(0.0f, 0.0f);
+drawAirConditioning(0.0f, 4.0f);
+drawAirConditioning(-3.6f, 4.0f);
 
 drawInternWalls();
 
