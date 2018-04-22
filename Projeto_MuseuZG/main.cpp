@@ -8,7 +8,7 @@ float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
 //float x = 0.0f, z = 10.0f;
-float x = -0.8f, z =-12.0f;
+float x = -0.8f, z =-15.0f;
 
 float door_angle = 0.0f;
 
@@ -48,7 +48,7 @@ void drawSky() {
 void drawMuseum(){
 
 glColor3f(0.9f, 0.9f, 0.0f);
-glScalef(1.8f, 1.8f, 1.8f);
+glScalef(1.8f, 1.89f, 1.8f);
 
 // Front side
 glPushMatrix();
@@ -342,19 +342,19 @@ void drawInternWalls() {
 
     // divisory3
     glPushMatrix();
-        glTranslatef(-1.0f, -1.2f, -4.0f);
+        glTranslatef(-1.0f, -1.2f, -3.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
-        glScalef(0.1, 4.0, 5.0);
+        glScalef(0.1, 4.0, 6.0);
         glutSolidCube(1.0);
     glPopMatrix();
 
 }
 
-void drawBank(GLfloat z) {
+void drawBank(GLfloat x, GLfloat z) {
 
     //acento
     glPushMatrix();
-        glTranslatef(-1.5f, -1.0f, -0.6f + z);
+        glTranslatef(-1.5f+ x, -1.0f, -0.6f + z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.5, 0.1, 1.0);
         glutSolidCube(1.0);
@@ -362,28 +362,28 @@ void drawBank(GLfloat z) {
 
     //pés
     glPushMatrix();
-        glTranslatef(-1.6f, -1.5f, -0.3f+ z);
+        glTranslatef(-1.6f+ x, -1.5f, -0.3f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.4f, -1.5f, -0.3f+ z);
+        glTranslatef(-1.4f+ x, -1.5f, -0.3f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.4f, -1.5f, -0.9f+ z);
+        glTranslatef(-1.4f+ x, -1.5f, -0.9f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
     glPopMatrix();
 
      glPushMatrix();
-        glTranslatef(-1.6f, -1.5f, -0.9f+ z);
+        glTranslatef(-1.6f+ x, -1.5f, -0.9f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.1, 1.0, 0.1);
         glutSolidCube(1.0);
@@ -391,62 +391,62 @@ void drawBank(GLfloat z) {
 
 }
 
-void drawChair(GLfloat z) {
+void drawChair(GLfloat x, GLfloat z) {
 
     //acento
     glPushMatrix();
-        glTranslatef(-1.2f, -1.0f, 0.2f);
+        glTranslatef(-1.2f + x, -1.0f, 0.2f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.5, 0.1, 0.46);
+        glScalef(0.4, 0.04, 0.4);
         glutSolidCube(1.0);
     glPopMatrix();
 
     //pés
     glPushMatrix();
-        glTranslatef(-1.35f, -1.5f, 0.38f+ z);
+        glTranslatef(-1.35f+ x, -1.5f, 0.35f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.1, 1.0, 0.1);
+        glScalef(0.05, 1.0, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.05f, -1.5f, 0.38f+ z);
+        glTranslatef(-1.05f+ x, -1.5f, 0.35f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.1, 1.0, 0.1);
+        glScalef(0.05, 1.0, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.05f, -1.5f, 0.1f+ z);
+        glTranslatef(-1.05f+ x, -1.5f, 0.1f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.1, 1.0, 0.1);
+        glScalef(0.05, 1.0, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
      glPushMatrix();
-        glTranslatef(-1.35f, -1.5f, 0.1f+ z);
+        glTranslatef(-1.35f+ x, -1.5f, 0.1f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.1, 1.0, 0.1);
+        glScalef(0.05, 1.0, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
     // encosto
     glPushMatrix();
-        glTranslatef(-1.2f, -1.0f, 0.15f);
+        glTranslatef(-1.2f+ x, -1.05f, 0.1f+ z);
         glRotatef(90.0f, 1, 0, 0);
         glTranslatef(0.0f, 0.28f, -0.25f);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.5, 0.05, 0.6);
+        glScalef(0.4, 0.04, 0.4);
         glutSolidCube(1.0);
     glPopMatrix();
 
 }
 
-void drawTable(GLfloat z) {
+void drawTable(GLfloat x, GLfloat z) {
 
     // tampo
     glPushMatrix();
-        glTranslatef(-1.2f, -0.75f, -0.6f + z);
+        glTranslatef(-1.2f+ x, -0.85f, -0.6f + z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.7, 0.05, 0.7);
         glutSolidCube(1.0);
@@ -454,34 +454,85 @@ void drawTable(GLfloat z) {
 
     //pés
     glPushMatrix();
-        glTranslatef(-1.4f, -1.5f, -0.4f+ z);
+        glTranslatef(-1.4f+ x, -1.5f, -0.4f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.05, 1.5, 0.05);
+        glScalef(0.05, 1.3, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.0f, -1.5f, -0.4f+ z);
+        glTranslatef(-1.0f+ x, -1.5f, -0.4f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.05, 1.5, 0.05);
+        glScalef(0.05, 1.3, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(-1.0f, -1.5f, -0.8f+ z);
+        glTranslatef(-1.0f+ x, -1.5f, -0.8f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.05, 1.5, 0.05);
+        glScalef(0.05, 1.3, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
      glPushMatrix();
-        glTranslatef(-1.4f, -1.5f, -0.8f+ z);
+        glTranslatef(-1.4f+ x, -1.5f, -0.8f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
-        glScalef(0.05, 1.5, 0.05);
+        glScalef(0.05, 1.3, 0.05);
         glutSolidCube(1.0);
     glPopMatrix();
 
 
+
+}
+
+void drawRack(GLfloat x, GLfloat y, GLfloat z) {
+
+    // partition1
+    glPushMatrix();
+        glTranslatef(-0.8f + x, -1.0f , -6.7f);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.5, 0.04, 0.4);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // partition2
+    glPushMatrix();
+        glTranslatef(-0.8f + x, -1.0f + y, -6.7f + z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.5, 0.04, 0.4);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // partition3
+    glPushMatrix();
+        glTranslatef(-0.8f + x, -1.2f + y, -6.7f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.5, 0.04, 0.4);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // partition4
+    glPushMatrix();
+        glTranslatef(-0.8f + x, -1.4f + y, -6.7f+ z);
+        glColor3f(0.3f, 0.0f, 0.0f);
+        glScalef(0.5, 0.04, 0.4);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //planos laterais
+    glPushMatrix();
+        glTranslatef(-0.55f + x, -1.54f+ y, -6.72f+ z);
+        glColor3f(0.5f, 0.f, 0.0f);
+        glScalef(0.03, 1.1, 0.4);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.04f+ x, -1.54f+ y, -6.72f+ z);
+        glColor3f(0.5f, 0.0f, 0.0f);
+        glScalef(0.03, 1.1, 0.4);
+        glutSolidCube(1.0);
+    glPopMatrix();
 
 }
 
@@ -538,9 +589,13 @@ drawMuseum();
 drawDoor();
 drawWindows();
 drawPictures(1.998, -0.3);
-drawBank(-2.0f);
-drawChair(0.0f);
-drawTable(0.0f);
+drawBank(0.8f, -2.0f);
+drawBank(0.8f, -4.0f);
+drawChair(2.5f, 0.5f);
+drawTable(2.5f, 0.8f);
+
+drawRack(0.05f, 0.6f, 0.0f);
+
 drawInternWalls();
 
 glFlush();
