@@ -1,4 +1,3 @@
-
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <math.h>
@@ -195,7 +194,8 @@ glColor3f(0.9f, 0.9f, 0.0f);
 
 void drawPictures(float x, float y) {
 
-glTranslatef(0.0f, 1.3f, 0.0f);
+
+	glTranslatef(0.0f, 1.3f, 0.0f);
 
         glColor3f(1.0f, 0.0f, 0.1f);
         glBegin(GL_QUADS);
@@ -566,6 +566,68 @@ void drawTV (GLfloat x, GLfloat y, GLfloat z) {
 
 }
 
+void drawSculture(){// (GLfloat x, GLfloat y, GLfloat z) {
+	GLfloat x, y,z;
+	int i;
+	x=1;
+	y=0.5;
+	z=-3;
+
+	glTranslatef(0.0f, -1.3f, 0.0f);
+
+	glPushMatrix();
+		glTranslatef(1,0.25,-1.5);
+		glColor3f(0.1f, 0.1f, 0.0f);
+		glScalef(0.2, 0.5, 0.2);
+		glutSolidCube(1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(1,0.25,-3);
+		glColor3f(1, 1, 1);
+		glScalef(0.2, 0.5, 0.2);
+		glutSolidCube(1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+
+		glColor3f(0.1f, 0.1f, 0.0f);
+		glTranslatef(x, y, z);
+		glBegin(GL_POLYGON);
+			for(i=0; i<1000; i++){
+				glVertex3f(cosf(M_PI*i/100)*0.1, 0.0001*i, sinf(M_PI*i/100)*0.1);
+
+
+			}
+
+
+		glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+
+		glColor3f(0.5, 0.5, 0.5);
+		glTranslatef(x, y, -1.5);
+		glBegin(GL_POLYGON);
+			double c;
+
+			for(i=0; i<1000; i++){
+				c = i/100;
+				x = cosf(M_PI*i/100)*(1/c)*0.1, 0.0002*i;
+				z = sinf(M_PI*i/100)*(1/c)*0.1;
+				x = x>1?0:x;
+				z = z>1?0:z;
+				glVertex3d(x, 0.0002*i, z);
+
+
+			}
+
+
+		glEnd();
+	glPopMatrix();
+}
+
+
 void reshape(int w, int h)
 {
 
@@ -624,8 +686,9 @@ drawAirConditioning(0.0f, 4.0f);
 drawAirConditioning(-3.6f, 4.0f);
 
 drawTV(0.0f, 0.0f, 0.0f);
-
 drawInternWalls();
+drawSculture();
+
 
 glFlush();
 glutSwapBuffers();
@@ -706,3 +769,4 @@ glutMainLoop();
 
 return 1;
 }
+
