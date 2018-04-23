@@ -7,7 +7,7 @@ float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
 //float x = 0.0f, z = 10.0f;
-float x = -0.8f, z =-5.0f;
+float x = 7.8f, z =8.0f;
 
 float door_angle = 0.0f;
 
@@ -47,7 +47,7 @@ void drawSky() {
 void drawMuseum(){
 
 glColor3f(0.9f, 0.9f, 0.0f);
-glScalef(1.8f, 1.89f, 1.8f);
+glScalef(1.89f, 1.89f, 1.89f);
 
 // Front side
 glPushMatrix();
@@ -190,6 +190,90 @@ glColor3f(0.9f, 0.9f, 0.0f);
                 glVertex3f(2.0f, 0.7f, -10.0f);
             glEnd();
     glPopMatrix();
+
+// windows covers
+
+    glColor3f(0.85, 0.85, 0.0);
+
+    //upper
+    glPushMatrix();
+        glTranslatef(-1.1f, 1.05f, 1.2f);
+        glScalef(1.0, 0.05, 0.2);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.1f, 1.05f, 1.2f);
+        glScalef(1.0, 0.05, 0.2);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(2.17f, 1.05f, -0.8f);
+        glScalef(0.3, 0.05, 3.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(2.17f, 0.45f, -0.8f);
+        glScalef(0.3, 0.05, 3.5);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //down
+    glPushMatrix();
+        glTranslatef(-1.1f, 0.40f, 1.2f);
+        glScalef(1.0, 0.05, 0.2);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.1f, 0.40f, 1.2f);
+        glScalef(1.0, 0.05, 0.2);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    //sides
+    glPushMatrix();
+        glTranslatef(-0.62f, 0.73f, 1.15f);
+        glScalef(0.05, 0.71, 0.25);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.62f, 0.73f, 1.15f);
+        glScalef(0.05, 0.71, 0.25);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(0.62f, 0.73f, 1.15f);
+        glScalef(0.05, 0.71, 0.25);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.62f, 0.73f, 1.15f);
+        glScalef(0.05, 0.71, 0.25);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+
+    glPushMatrix();
+        glTranslatef(2.1f, 0.74f, 0.98f);
+        glScalef(0.3, 0.64, 0.05);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(2.1f, 0.74f, -2.52f);
+        glScalef(0.3, 0.64, 0.05);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+
+
+
 }
 
 void drawPictures(float x, float y) {
@@ -256,10 +340,60 @@ void drawWindows() {
     glPushMatrix();
 
         glTranslatef(0.0f, 1.3f, 0.0f);
-        glColor3f(1.0f, 1.0f, 1.0f);
+
+        glLineWidth(3);
+        glBegin(GL_LINES);
+            glColor3f(0.2f, 0.2f, 0.2f);
+            glVertex3f(-0.75, -0.4, 1.008);
+            glVertex3f(-1.5, -0.4, 1.008);
+            glVertex3f(-0.75, -0.5, 1.008);
+            glVertex3f(-1.5, -0.5, 1.008);
+            glVertex3f(-0.75, -0.6, 1.008);
+            glVertex3f(-1.5, -0.6, 1.008);
+            glVertex3f(-0.75, -0.7, 1.008);
+            glVertex3f(-1.5, -0.7, 1.008);
+
+            glVertex3f(0.75, -0.4, 1.008);
+            glVertex3f(1.5, -0.4, 1.008);
+            glVertex3f(0.75, -0.5, 1.008);
+            glVertex3f(1.5, -0.5, 1.008);
+            glVertex3f(0.75, -0.6, 1.008);
+            glVertex3f(1.5, -0.6, 1.008);
+            glVertex3f(0.75, -0.7, 1.008);
+            glVertex3f(1.5, -0.7, 1.008);
+
+            glVertex3f(2.008, -0.4, -2.5);
+            glVertex3f(2.008, -0.4, -1.75);
+            glVertex3f(2.008, -0.5, -2.5);
+            glVertex3f(2.008, -0.5, -1.75);
+            glVertex3f(2.008, -0.6, -2.5);
+            glVertex3f(2.008, -0.6, -1.75);
+            glVertex3f(2.008, -0.7, -2.5);
+            glVertex3f(2.008, -0.7, -1.75);
+
+            glVertex3f(2.008, -0.4, -1.25);
+            glVertex3f(2.008, -0.4, -0.5);
+            glVertex3f(2.008, -0.5, -1.25);
+            glVertex3f(2.008, -0.5, -0.5);
+            glVertex3f(2.008, -0.6, -1.25);
+            glVertex3f(2.008, -0.6, -0.5);
+            glVertex3f(2.008, -0.7, -1.25);
+            glVertex3f(2.008, -0.7, -0.5);
+
+            glVertex3f(2.008, -0.4, 0.0);
+            glVertex3f(2.008, -0.4, 0.75);
+            glVertex3f(2.008, -0.5, 0.0);
+            glVertex3f(2.008, -0.5, 0.75);
+            glVertex3f(2.008, -0.6, 0.0);
+            glVertex3f(2.008, -0.6, 0.75);
+            glVertex3f(2.008, -0.7, 0.0);
+            glVertex3f(2.008, -0.7, 0.75);
+        glEnd();
+
+        glColor3f(0.7f, 0.7f, 0.7f);
 
         // Front side
-         glBegin(GL_QUADS);  // Window Left
+        glBegin(GL_QUADS);  // Window Left
             glVertex3f(-1.5,-0.3,1.0001);
             glVertex3f(-0.75,-0.3,1.0001);
             glVertex3f(-0.75,-0.3 - 0.5,1.0001);
@@ -273,26 +407,28 @@ void drawWindows() {
             glVertex3f(1.5,-0.3 - 0.5,1.0001);
         glEnd();
 
+
         //Right side
         glBegin(GL_QUADS);  // Window Right
-            glVertex3f(2.0001, -0.3, -2.5);
-            glVertex3f(2.0001, -0.3, -1.75);
-            glVertex3f(2.0001, -0.3 - 0.5, -1.75);
-             glVertex3f(2.0001, -0.3 - 0.5, -2.5);
+        glColor3f(0.7f, 0.7f, 0.7f);
+            glVertex3f(2.0002, -0.3, -2.5);
+            glVertex3f(2.0002, -0.3, -1.75);
+            glVertex3f(2.0002, -0.3 - 0.5, -1.75);
+             glVertex3f(2.0002, -0.3 - 0.5, -2.5);
         glEnd();
 
         glBegin(GL_QUADS);  // Window Middle
-           glVertex3f(2.0001, -0.3, -1.25);
-            glVertex3f(2.0001, -0.3, -0.5);
-            glVertex3f(2.0001, -0.3 - 0.5, -0.5);
-             glVertex3f(2.0001, -0.3 - 0.5, -1.25);
+           glVertex3f(2.0002, -0.3, -1.25);
+            glVertex3f(2.0002, -0.3, -0.5);
+            glVertex3f(2.0002, -0.3 - 0.5, -0.5);
+             glVertex3f(2.0002, -0.3 - 0.5, -1.25);
         glEnd();
 
         glBegin(GL_QUADS);  // Window Left
-           glVertex3f(2.0001, -0.3, 0.0);
-            glVertex3f(2.0001, -0.3, 0.75);
-            glVertex3f(2.0001, -0.3 - 0.5, 0.75);
-             glVertex3f(2.0001, -0.3 - 0.5, 0.0);
+           glVertex3f(2.0002, -0.3, 0.0);
+            glVertex3f(2.0002, -0.3, 0.75);
+            glVertex3f(2.0002, -0.3 - 0.5, 0.75);
+             glVertex3f(2.0002, -0.3 - 0.5, 0.0);
         glEnd();
 
     glPopMatrix();
