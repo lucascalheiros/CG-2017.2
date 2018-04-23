@@ -749,10 +749,10 @@ void drawSculture(){// (GLfloat x, GLfloat y, GLfloat z) {
 
 			for(i=0; i<1000; i++){
 				c = i/100;
-				x = cosf(M_PI*i/100)*(1/c)*0.1, 0.0002*i;
+				x = cosf(M_PI*i/100)*(1/c)*0.1;
 				z = sinf(M_PI*i/100)*(1/c)*0.1;
-				x = x>1?0:x;
-				z = z>1?0:z;
+				x = x>1||x<-1?0:x;
+				z = z>1||z<-1?0:z;
 				glVertex3d(x, 0.0002*i, z);
 
 
