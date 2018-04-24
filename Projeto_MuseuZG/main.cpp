@@ -7,7 +7,7 @@ float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
 //float x = 0.0f, z = 10.0f;
-float x = 2.0f, z =-10.0f;
+float x = 0.0f, z =10.0f;
 
 float door_angle = 0.0f;
 
@@ -271,7 +271,46 @@ glColor3f(0.9f, 0.9f, 0.0f);
         glutSolidCube(1.0);
     glPopMatrix();
 
+    // entrada
 
+    glPushMatrix();
+        glTranslatef(-0.5f, -1.2f, 1.2f);
+        glColor3f(0.8f, 0.8f, 0.0f);
+        glScalef(0.1, 5.0, 0.3);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(0.5f, -1.2f, 1.2f);
+        glColor3f(0.8f, 0.8f, 0.0f);
+        glScalef(0.1, 5.0, 0.3);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(0.0f, 1.3f, 1.2f);
+        glColor3f(0.8f, 0.8f, 0.0f);
+        glScalef(1.1, 0.1, 0.3);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    GLUquadricObj *quadric;
+
+    glPushMatrix();
+        glTranslatef(-0.3f, 1.3f, 1.3f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glRotatef(90, 1,0,0);
+        quadric = gluNewQuadric();
+        gluCylinder(quadric, 0.05, 0.05, 1.8, 22, 3);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(0.3f, 1.3f, 1.3f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glRotatef(90, 1,0,0);
+        quadric = gluNewQuadric();
+        gluCylinder(quadric, 0.05, 0.05, 1.8, 22, 3);
+    glPopMatrix();
 
 
 }
@@ -480,7 +519,7 @@ void drawDoor() {
 		glTranslatef(-0.3f, 0.5f, 1);
         glRotatef (door_angle, 0,1,0);
     	glTranslatef(0.3f, 0, 0);
-        glColor3f(1.0f, 1.0f, 1.0f);
+        glColor3f(0.7f, 0.7f, 0.7f);
         glScalef(0.6, 1.1, 0.1f);
         glutSolidCube(1.0);
     glPopMatrix();
