@@ -7,7 +7,7 @@ float lx = 0.0f, lz = -1.0f;
 
 // XZ position of the camera
 //float x = 0.0f, z = 10.0f;
-float x = 7.8f, z =8.0f;
+float x = 2.0f, z =-10.0f;
 
 float door_angle = 0.0f;
 
@@ -276,50 +276,202 @@ glColor3f(0.9f, 0.9f, 0.0f);
 
 }
 
-void drawPictures(float x, float y) {
+void drawPictures(GLfloat x, GLfloat y, GLfloat z) {
 
 
-	glTranslatef(0.0f, 1.3f, 0.0f);
+glTranslatef(0.0f, 1.3f, 0.0f);
 
-        glColor3f(1.0f, 0.0f, 0.1f);
-        glBegin(GL_QUADS);
-           glVertex3f(x, y + 0.1, -6.0);
-            glVertex3f(x, y + 0.1, -4.5);
-            glVertex3f(x, y - 0.6, -4.5);
-             glVertex3f(x, y - 0.6, -6.0);
-        glEnd();
+    // corredor
 
-        glColor3f(9.0f, 0.0f, 0.9f);
-        glBegin(GL_QUADS);
-           glVertex3f(x, y, -3.5);
-            glVertex3f(x, y, -3.0);
-            glVertex3f(x, y - 0.5, -3.0);
-             glVertex3f(x, y -0.5, -3.5);
-        glEnd();
+    glPushMatrix();
+        glTranslatef(-1.05f+ x, -0.30f + y, -2.0f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.7, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
 
+    glPushMatrix();
+        glTranslatef(-1.059f+ x, -0.30f + y, -2.02f + z);
         glColor3f(0.9f, 0.0f, 0.0f);
-        glBegin(GL_QUADS);
-            glVertex3f(x, y, -2.5);
-            glVertex3f(x, y, -1.75);
-            glVertex3f(x, y - 0.5, -1.75);
-             glVertex3f(x, y - 0.5, -2.5);
-        glEnd();
+        glScalef(0.04, 0.65, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
 
+    glPushMatrix();
+        glTranslatef(-1.05f+ x, -0.30f + y, -3.5f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.7, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.059f+ x, -0.30f + y, -3.52f + z);
+        glColor3f(0.0f, 0.0f, 0.9f);
+        glScalef(0.04, 0.65, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.05f+ x, -0.30f + y, -5.0f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.7, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.059f+ x, -0.30f + y, -5.02f + z);
+        glColor3f(0.0f, 0.7f, 0.0f);
+        glScalef(0.04, 0.65, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.95f+ x, -0.30f + y, -2.0f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.7, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.941f+ x, -0.30f + y, -2.02f + z);
+        glColor3f(0.0f, 0.7f, 0.0f);
+        glScalef(0.04, 0.65, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.95f+ x, -0.30f + y, -3.5f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.7, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.941f+ x, -0.30f + y, -3.52f + z);
+        glColor3f(0.9f, 0.f, 0.0f);
+        glScalef(0.04, 0.65, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.95f+ x, -0.30f + y, -5.0f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.7, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.941f+ x, -0.30f + y, -5.02f + z);
+        glColor3f(0.0f, 0.0f, 0.9f);
+        glScalef(0.04, 0.65, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    // lado direito
+    glPushMatrix();
+        glTranslatef(1.95f+ x, -0.20f + y, -0.5f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.9, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.941f+ x, -0.20f + y, -0.5f + z);
+        glColor3f(0.9f, 0.2f, 0.0f);
+        glScalef(0.04, 0.85, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.95f+ x, -0.20f + y, -2.0f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.9, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.941f+ x, -0.20f + y, -2.0f + z);
         glColor3f(0.9f, 0.0f, 0.9f);
-        glBegin(GL_QUADS);
-           glVertex3f(x, y, -1.25);
-            glVertex3f(x, y, -0.5);
-            glVertex3f(x, y - 0.5, -0.5);
-             glVertex3f(x, y - 0.5, -1.25);
-        glEnd();
+        glScalef(0.04, 0.85, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
 
-        glColor3f(0.0f, 0.9f, 0.0f);
-        glBegin(GL_QUADS);
-           glVertex3f(x, y, 0.0);
-            glVertex3f(x, y, 0.75);
-            glVertex3f(x, y - 0.5, 0.75);
-             glVertex3f(x, y - 0.5, 0.0);
-        glEnd();
+    glPushMatrix();
+        glTranslatef(1.95f+ x, -0.20f + y, -3.5f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.9, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.941f+ x, -0.20f + y, -3.5f + z);
+        glColor3f(0.5f, 0.8f, 0.8f);
+        glScalef(0.04, 0.85, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.95f+ x, -0.20f + y, -5.0f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.9, 0.9);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.941f+ x, -0.20f + y, -5.0f + z);
+        glColor3f(0.7f, 0.0f, 0.0f);
+        glScalef(0.04, 0.85, 0.8);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+
+    // fim do corredor
+
+    glPushMatrix();
+        glTranslatef(-1.50f+ x, -0.40f + y, 2.50f - 1.05 + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.7, 0.7, 0.05);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.50f+ x, -0.40f + y, 2.491f - 1.05 + z);
+        glColor3f(0.0f, 0.0f, 0.9f);
+        glScalef(0.6, 0.65, 0.04);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.50f+ x, -0.40f + y, 2.47f - 1.05 + z);
+        glColor3f(0.9f, 0.0f, 0.0f);
+        glScalef(0.4, 0.45, 0.02);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-1.50f+ x, -0.40f + y, 2.45f - 1.05 + z);
+        glColor3f(0.0f, 0.7f, 0.0f);
+        glScalef(0.3, 0.35, 0.01);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+
+    // quadro por trás da parede
+    glPushMatrix();
+        glTranslatef(1.95f+ x, -0.20f + y, -8.0f + z);
+        glColor3f(0.1f, 0.1f, 0.1f);
+        glScalef(0.05, 0.9, 1.2);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(1.941f+ x, -0.20f + y, -8.0f + z);
+        glColor3f(0.7f, 0.6f, 0.0f);
+        glScalef(0.04, 0.85, 1.1);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+
 }
 
 void drawDoor() {
@@ -672,6 +824,35 @@ void drawRack(GLfloat x, GLfloat y, GLfloat z) {
 
 }
 
+void drawObjectsRack(GLfloat x, GLfloat y, GLfloat z) {
+
+    // teaplot
+     glPushMatrix();
+        glTranslatef(-0.75f+ x, -0.90f + y, -6.8f + z);
+        glColor3f(0.0f, 0.0f, 0.9f);
+        glScalef(0.08, 0.08, 0.08);
+        glutWireTeapot(1.0);
+    glPopMatrix();
+
+    // torus
+    glPushMatrix();
+        glTranslatef(-0.75f+ x, -0.72f + y, -6.8f + z);
+        glColor3f(0.0f, 0.0f, 0.9f);
+        glScalef(0.2, 0.2, 0.2);
+        glRotatef(-50, 1,0,0);
+        glutWireTorus(0.1, 0.3, 20,20);
+    glPopMatrix();
+
+    // object
+    glPushMatrix();
+        glTranslatef(-0.75f + x, -0.52f + y, -6.8f+ z);
+       glColor3f(0.0f, 0.0f, 0.9f);
+        glScalef(0.8, 0.8, 0.8);
+        glutWireSphere(0.1, 10, 20);
+    glPopMatrix();
+
+}
+
 void drawAirConditioning(GLfloat x, GLfloat z) {
 
     glPushMatrix();
@@ -680,8 +861,6 @@ void drawAirConditioning(GLfloat x, GLfloat z) {
         glScalef(0.3, 0.15, 0.5);
         glutSolidCube(1.0);
     glPopMatrix();
-
-
 }
 
 void drawTV (GLfloat x, GLfloat y, GLfloat z) {
@@ -810,12 +989,14 @@ drawMuseum();
 
 drawDoor();
 drawWindows();
-drawPictures(1.998, -0.3);
+drawPictures(0.0f, -0.1f, -0.5f);
 drawBank(0.8f, -2.0f);
 drawBank(0.8f, -4.0f);
 drawChair(2.5f, 0.5f);
 drawTable(2.5f, 0.8f);
 drawRack(0.05f, 0.6f, 0.0f);
+
+drawObjectsRack(0.0f, 0.0f, 0.0f);
 
 drawAirConditioning(0.0f, 0.0f);
 drawAirConditioning(0.0f, 4.0f);
