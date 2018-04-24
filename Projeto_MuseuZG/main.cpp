@@ -76,7 +76,7 @@ glPushMatrix();
 		glEnd();
 
 
-        glColor3f(0.9f, 0.9f, 0.9f);
+        glColor3f(0.8f, 0.8f, 0.8f);
         glBegin(GL_QUADS);  // Roof
             glVertex3f(-2, 0.1, 1);
             glVertex3f(2, 0.1, 1);
@@ -92,7 +92,7 @@ glPushMatrix();
             glVertex3f(-2,0.1, 1);
         glEnd();
 
-        glColor3f(0.9f, 0.9f, 0.9f);
+        glColor3f(0.8f, 0.8f, 0.8f);
         glBegin(GL_QUADS);  // Roof
             glVertex3f(-2, 0.4, 1);
             glVertex3f(2, 0.4, 1);
@@ -108,7 +108,7 @@ glPushMatrix();
             glVertex3f(-2,0.1, 1);
         glEnd();
 
-        glColor3f(0.9f, 0.9f, 0.9f);
+        glColor3f(0.8f, 0.8f, 0.8f);
         glBegin(GL_QUADS);  // Roof
             glVertex3f(-2, 0.7, 1);
             glVertex3f(2, 0.7, 1);
@@ -236,28 +236,27 @@ glColor3f(0.9f, 0.9f, 0.0f);
     //sides
     glPushMatrix();
         glTranslatef(-0.62f, 0.73f, 1.15f);
-        glScalef(0.05, 0.71, 0.25);
+        glScalef(0.05, 0.71, 0.2);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.62f, 0.73f, 1.15f);
-        glScalef(0.05, 0.71, 0.25);
+        glScalef(0.05, 0.71, 0.2);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(0.62f, 0.73f, 1.15f);
-        glScalef(0.05, 0.71, 0.25);
+        glScalef(0.05, 0.71, 0.2);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.62f, 0.73f, 1.15f);
-        glScalef(0.05, 0.71, 0.25);
+        glScalef(0.05, 0.71, 0.2);
         glutSolidCube(1.0);
     glPopMatrix();
-
 
     glPushMatrix();
         glTranslatef(2.1f, 0.74f, 0.98f);
@@ -271,29 +270,62 @@ glColor3f(0.9f, 0.9f, 0.0f);
         glutSolidCube(1.0);
     glPopMatrix();
 
-    // entrada
+    // cobertura da porta
 
     glPushMatrix();
         glTranslatef(-0.5f, -1.2f, 1.2f);
-        glColor3f(0.8f, 0.8f, 0.0f);
+        glColor3f(0.85f, 0.85f, 0.0f);
         glScalef(0.1, 5.0, 0.3);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(0.5f, -1.2f, 1.2f);
-        glColor3f(0.8f, 0.8f, 0.0f);
+        glColor3f(0.85f, 0.85f, 0.0f);
         glScalef(0.1, 5.0, 0.3);
         glutSolidCube(1.0);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(0.0f, 1.3f, 1.2f);
-        glColor3f(0.8f, 0.8f, 0.0f);
+        glColor3f(0.85f, 0.85f, 0.0f);
         glScalef(1.1, 0.1, 0.3);
         glutSolidCube(1.0);
     glPopMatrix();
 
+// detalhes de cima
+
+    glPushMatrix();
+        glTranslatef(0.0f, 1.715f, 1.05f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(4.0, 0.1, 0.07);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    for(int i = 0; i < 27; i++) {
+        glPushMatrix();
+            glTranslatef(-1.95f + 0.15f*i, 1.57f, 1.05f);
+            glColor3f(0.9f, 0.9f, 0.9f);
+            glScalef(0.09, 0.05, 0.05);
+            glutSolidCube(1.0);
+        glPopMatrix();
+    }
+
+    glPushMatrix();
+        glTranslatef(0.0f, 1.975f, 1.05f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(4.0, 0.1, 0.07);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(0.0f, 1.375f, 1.05f);
+        glColor3f(0.9f, 0.9f, 0.9f);
+        glScalef(4.0, 0.1, 0.07);
+        glutSolidCube(1.0);
+    glPopMatrix();
+
+// cilindros
     GLUquadricObj *quadric;
 
     glPushMatrix();
@@ -311,7 +343,6 @@ glColor3f(0.9f, 0.9f, 0.0f);
         quadric = gluNewQuadric();
         gluCylinder(quadric, 0.05, 0.05, 1.8, 22, 3);
     glPopMatrix();
-
 
 }
 
