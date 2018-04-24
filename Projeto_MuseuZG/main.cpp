@@ -975,42 +975,90 @@ void drawSculture(){// (GLfloat x, GLfloat y, GLfloat z) {
 	glPopMatrix();
 
 	glPushMatrix();
+		glTranslatef(1,0.25,-4.5);
+		glColor3f(0.1f, 0.1f, 0.0f);
+		glScalef(0.2, 0.5, 0.2);
+		glutSolidCube(1.0);
+	glPopMatrix();
 
+	glPushMatrix();
+		glTranslatef(1,0.25,-8.5);
+		glColor3f(0.1f, 0.1f, 0.0f);
+		glScalef(0.2, 0.5, 0.2);
+		glutSolidCube(1.0);
+	glPopMatrix();
+
+	//ecultura 1
+	glPushMatrix();
 		glColor3f(0.1f, 0.1f, 0.0f);
 		glTranslatef(x, y, z);
 		glBegin(GL_POLYGON);
 			for(i=0; i<1000; i++){
 				glVertex3f(cosf(M_PI*i/100)*0.1, 0.0001*i, sinf(M_PI*i/100)*0.1);
-
-
 			}
-
-
 		glEnd();
 	glPopMatrix();
 
+	//ecultura 2
 	glPushMatrix();
-
 		glColor3f(0.5, 0.5, 0.5);
 		glTranslatef(x, y, -1.5);
 		glBegin(GL_POLYGON);
 			double c;
+			float x1,z1;
+			for(i=0; i<1000; i++){
+				c = i/100;
+				x1 = cosf(M_PI*i/100)*(1/c)*0.1;
+				z1 = sinf(M_PI*i/100)*(1/c)*0.1;
+				x1 = x1>1||x1<-1?0:x1;
+				z1 = z1>1||z1<-1?0:z1;
+				glVertex3d(x1, 0.0002*i, z1);
+			}
+
+		glEnd();
+	glPopMatrix();
+
+	//ecultura 3
+	glPushMatrix();
+		glTranslatef(1,0.5,-4.5);
+		glColor3f(0, 0, 0);
+		glScalef(0.03, 0.2, 0.06);
+		glutSolidCube(1.0);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(1,0.5,-4.5);
+		glColor3f(0.3, 0.3, 0.3);
+		glScalef(0.015, 0.25, 0.03);
+		glutSolidCube(1.0);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(1,0.55,-4.5);
+		glColor3f(0.3, 0.3, 0.3);
+		glScalef(0.015, 0.1, 0.08);
+		glutSolidCube(1.0);
+	glPopMatrix();
+
+	//ecultura 4
+	glPushMatrix();
+		glTranslatef(1,0.5,-8.5);
+		glColor3f(0, 0, 0);
+		glBegin(GL_POLYGON);
 
 			for(i=0; i<1000; i++){
 				c = i/100;
-				x = cosf(M_PI*i/100)*(1/c)*0.1;
-				z = sinf(M_PI*i/100)*(1/c)*0.1;
-				x = x>1||x<-1?0:x;
-				z = z>1||z<-1?0:z;
-				glVertex3d(x, 0.0002*i, z);
-
+				x1 = cosf(M_PI*i/100)*(1/c)*0.1;
+				z1 = sinf(M_PI*i/100)*(1/c)*0.1;
+				x1 = x1>1||x1<-1?0:x1;
+				z1 = z1>1||z1<-1?0:z1;
+				glVertex3d(x1, 0.0002*i, z1);
+				glVertex3d(x1, cosf(M_PI*i/100)*(1/c)*0.1, z1);
 
 			}
-
 
 		glEnd();
 	glPopMatrix();
 }
+
 
 
 void reshape(int w, int h)
