@@ -3,16 +3,17 @@
 #include <math.h>
 
 // actual vector representing the camera's direction
-float lx = 0.0f, lz = -1.0f;
+float lx = 0.0f, ly = 0,lz = -1.0f;
 
 // XZ position of the camera
 //float x = 0.0f, z = 10.0f;
-float x = 0.0f, z =10.0f;
+float x = 0.0f,y = 1, z =10.0f;
 
+float verticalVectorFix;
 float door_angle = 0.0f;
 
 // angle for rotating triangle
-float angle = 0.0f;
+float angleXZ = 0.0f, angleY = 0;
 
 void init(void) {
     glClearColor(0.0, 0.0, 0.4, 0.1);
@@ -36,10 +37,10 @@ void drawSky() {
     // Draw sky
     glColor3f(0.5f, 0.8f, 0.9f);
     glBegin(GL_QUADS);
-        glVertex3f(-100.0f, 4.0f, -100.0f);
-        glVertex3f(-100.0f, 4.0f, 100.0f);
-        glVertex3f( 100.0f, 4.0f, 100.0f);
-        glVertex3f( 100.0f, 4.0f, -100.0f);
+        glVertex3f(-100.0f, 50.0f, -100.0f);
+        glVertex3f(-100.0f, 50.0f, 100.0f);
+        glVertex3f( 100.0f, 50.0f, 100.0f);
+        glVertex3f( 100.0f, 50.0f, -100.0f);
     glEnd();
 
 }
@@ -668,7 +669,7 @@ void drawInternWalls() {
 
     // small
     glPushMatrix();
-        glTranslatef(-0.4f, -1.2f, -9.73f);
+        glTranslatef(-0.4f, -1.3f, -9.73f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 0.5);
         glutSolidCube(1.0);
@@ -684,7 +685,7 @@ void drawInternWalls() {
 
     // small3
     glPushMatrix();
-        glTranslatef(-0.4f, -1.2f, -6.7f);
+        glTranslatef(-0.4f, -1.3f, -6.7f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 0.5);
         glutSolidCube(1.0);
@@ -692,7 +693,7 @@ void drawInternWalls() {
 
     // divisory2
     glPushMatrix();
-        glTranslatef(-0.7f, -1.2f, -6.5f);
+        glTranslatef(-0.7f, -1.3f, -6.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.7, 4.0, 0.1);
         glutSolidCube(1.0);
@@ -700,7 +701,7 @@ void drawInternWalls() {
 
     // divisory3
     glPushMatrix();
-        glTranslatef(-1.0f, -1.2f, -3.5f);
+        glTranslatef(-1.0f, -1.3f, -3.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 6.0);
         glutSolidCube(1.0);
@@ -1043,15 +1044,17 @@ void drawSculture(){// (GLfloat x, GLfloat y, GLfloat z) {
 		glTranslatef(1,0.5,-8.5);
 		glColor3f(0, 0, 0);
 		glBegin(GL_POLYGON);
-
+			float y1;
 			for(i=0; i<1000; i++){
 				c = i/100;
 				x1 = cosf(M_PI*i/100)*(1/c)*0.1;
 				z1 = sinf(M_PI*i/100)*(1/c)*0.1;
+				y1 = cosf(M_PI*i/100)*(1/c)*0.1;
 				x1 = x1>1||x1<-1?0:x1;
 				z1 = z1>1||z1<-1?0:z1;
+				y1 = y1>1||y1<-1?0:y1;
 				glVertex3d(x1, 0.0002*i, z1);
-				glVertex3d(x1, cosf(M_PI*i/100)*(1/c)*0.1, z1);
+				glVertex3d(x1, y1, z1);
 
 			}
 
@@ -1097,7 +1100,7 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 // Reset transformations
 glLoadIdentity();
 // Set the camera
-gluLookAt(x, 1.0f, z, x+lx, 1.0f, z+lz, 0.0f, 1.0f, 0.0f);
+gluLookAt(x, y, z, x+lx, y+ly, z+lz, 0.0f, 1.0f, 0.0f);
 
 
 drawGround();
@@ -1129,8 +1132,9 @@ glFlush();
 glutSwapBuffers();
 }
 
-void processNormalKeys(unsigned char key, int x, int y) {
-    switch(key){
+void processNormalKeys(unsigned char key, int x2, int y2) {
+
+	switch(key){
         case 'o':
             if(door_angle <= 118.0f) door_angle += 2.0f;
             glutPostRedisplay();
@@ -1141,10 +1145,36 @@ void processNormalKeys(unsigned char key, int x, int y) {
             glutPostRedisplay();
         break;
 
+        case 'w':
+        	angleY += 0.05f;
+        	ly = sin(angleY);
+        	break;
+        case 's':
+        	angleY -= 0.05f;
+        	ly = sin(angleY);
+        	break;
+        case 'a':
+        	angleXZ -= 0.05f;
+        	lx = sin(angleXZ);
+        	lz = -cos(angleXZ);
+        	break;
+        case 'd':
+        	angleXZ += 0.05f;
+        	lx = sin(angleXZ);
+        	lz = -cos(angleXZ);
+        	break;
+        case 'r':
+        	y += 0.5;
+        	break;
+        case 'f':
+        	y -= 0.5;
+        	break;
+
         case 27:
             exit(0);
         break;
     }
+
 }
 
 void processSpecialKeys(int key, int xx, int yy) {
@@ -1153,15 +1183,14 @@ void processSpecialKeys(int key, int xx, int yy) {
 
     switch (key) {
         case GLUT_KEY_LEFT :
-            angle -= 0.05f;
-            lx = sin(angle);
-            lz = -cos(angle);
+        	x += lz * fraction;
+        	z -= lx * fraction;
+
         break;
 
         case GLUT_KEY_RIGHT :
-            angle += 0.05f;
-            lx = sin(angle);
-            lz = -cos(angle);
+        	x -= lz * fraction;
+        	z += lx * fraction;
         break;
 
         case GLUT_KEY_UP :

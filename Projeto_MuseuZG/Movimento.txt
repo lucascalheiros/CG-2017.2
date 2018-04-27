@@ -1,0 +1,3 @@
+WASD - Movimentação do ângulo da câmera
+Direcionais - Movimentação da posição da câmera
+RF - Movimentação da posição da câmera pelo eixo y
