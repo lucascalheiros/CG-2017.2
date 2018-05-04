@@ -17,6 +17,45 @@ float angleXZ = 0.0f, angleY = 0;
 
 void init(void) {
     glClearColor(0.0, 0.0, 0.4, 0.1);
+
+     glEnable(GL_COLOR_MATERIAL);
+     glEnable(GL_LIGHTING);
+     glEnable(GL_LIGHT0);
+     glEnable(GL_LIGHT1);
+     glEnable(GL_LIGHT2);
+     glEnable(GL_DEPTH_TEST);
+     glShadeModel(GL_SMOOTH);
+}
+
+void ilumination (void) {
+        GLfloat luzAmbiente[4]={0.8,0.8,0.8,1.0};
+        GLfloat luzDifusa[4]={0.1,0.1,0.1,1.0};          // "cor"
+        GLfloat luzEspecular[4]={0.7, 0.7, 0.7, 1.0};// "brilho"
+        GLfloat posicaoLuz[4]={0.0, -1.0, 0.0, 1.0};
+        GLfloat posicaoLuz1[4]={0.0, 1.0, -3.0, 1.0};
+        GLfloat posicaoLuz2[4]={0.0, 1.0, -6.0, 1.0};
+
+        GLfloat especularidade[4]={1,1,1,1};
+        GLint especMaterial = 60;
+
+        //glMaterialfv(GL_FRONT,GL_SPECULAR, especularidade);
+       // glMateriali(GL_FRONT,GL_SHININESS,especMaterial);
+
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
+
+        glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular );
+        glPushMatrix();
+        glTranslatef(0, 0, 0);
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa );
+        glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz );
+        glPopMatrix();
+
+     /*   glLightfv(GL_LIGHT1, GL_DIFFUSE, luzDifusa );
+        glLightfv(GL_LIGHT1, GL_POSITION, posicaoLuz1 );
+        glLightfv(GL_LIGHT2, GL_DIFFUSE, luzDifusa );
+        glLightfv(GL_LIGHT2, GL_POSITION, posicaoLuz2 );*/
+
+
 }
 
 void drawGround() {
@@ -47,7 +86,7 @@ void drawSky() {
 
 void drawMuseum(){
 
-glColor3f(0.9f, 0.9f, 0.0f);
+glColor3f(1, 1, 0.0);
 glScalef(1.89f, 1.89f, 1.89f);
 
 // Front side
@@ -669,7 +708,7 @@ void drawInternWalls() {
 
     // small
     glPushMatrix();
-        glTranslatef(-0.4f, -1.3f, -9.73f);
+        glTranslatef(-0.4f, -1.3001f, -9.73f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 0.5);
         glutSolidCube(1.0);
@@ -685,7 +724,7 @@ void drawInternWalls() {
 
     // small3
     glPushMatrix();
-        glTranslatef(-0.4f, -1.3f, -6.7f);
+        glTranslatef(-0.4f, -1.3001, -6.7f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 0.5);
         glutSolidCube(1.0);
@@ -693,7 +732,7 @@ void drawInternWalls() {
 
     // divisory2
     glPushMatrix();
-        glTranslatef(-0.7f, -1.3f, -6.5f);
+        glTranslatef(-0.7f, -1.3001f, -6.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.7, 4.0, 0.1);
         glutSolidCube(1.0);
@@ -701,7 +740,7 @@ void drawInternWalls() {
 
     // divisory3
     glPushMatrix();
-        glTranslatef(-1.0f, -1.3f, -3.5f);
+        glTranslatef(-1.0f, -1.3001f, -3.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 6.0);
         glutSolidCube(1.0);
@@ -952,7 +991,7 @@ void drawTV (GLfloat x, GLfloat y, GLfloat z) {
 
 }
 
-void drawSculture(){// (GLfloat x, GLfloat y, GLfloat z) {
+void drawSculture(){
 	GLfloat x, y,z;
 	int i;
 	x=1;
@@ -1062,8 +1101,6 @@ void drawSculture(){// (GLfloat x, GLfloat y, GLfloat z) {
 	glPopMatrix();
 }
 
-
-
 void reshape(int w, int h)
 {
 
@@ -1099,6 +1136,7 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 // Reset transformations
 glLoadIdentity();
+ilumination();
 // Set the camera
 gluLookAt(x, y, z, x+lx, y+ly, z+lz, 0.0f, 1.0f, 0.0f);
 
@@ -1164,16 +1202,19 @@ void processNormalKeys(unsigned char key, int x2, int y2) {
         	lz = -cos(angleXZ);
         	break;
         case 'r':
-        	y += 0.5;
+        	y += 0.4;
         	break;
         case 'f':
-        	y -= 0.5;
+        	y -= 0.4;
+        	if(y<0)
+        		y=0.1;
         	break;
 
         case 27:
             exit(0);
         break;
     }
+
 
 }
 
