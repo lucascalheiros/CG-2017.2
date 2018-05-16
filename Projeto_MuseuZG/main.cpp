@@ -15,45 +15,33 @@ float door_angle = 0.0f;
 // angle for rotating triangle
 float angleXZ = 0.0f, angleY = 0;
 
+int mouseX;
+int mouseY;
+
 void init(void) {
     glClearColor(0.0, 0.0, 0.4, 0.1);
 
      glEnable(GL_COLOR_MATERIAL);
      glEnable(GL_LIGHTING);
      glEnable(GL_LIGHT0);
-     glEnable(GL_LIGHT1);
-     glEnable(GL_LIGHT2);
      glEnable(GL_DEPTH_TEST);
      glShadeModel(GL_SMOOTH);
 }
 
 void ilumination (void) {
-        GLfloat luzAmbiente[4]={0.8,0.8,0.8,1.0};
-        GLfloat luzDifusa[4]={0.1,0.1,0.1,1.0};          // "cor"
-        GLfloat luzEspecular[4]={0.7, 0.7, 0.7, 1.0};// "brilho"
-        GLfloat posicaoLuz[4]={0.0, -1.0, 0.0, 1.0};
-        GLfloat posicaoLuz1[4]={0.0, 1.0, -3.0, 1.0};
-        GLfloat posicaoLuz2[4]={0.0, 1.0, -6.0, 1.0};
+        GLfloat ambientLight[4]={0.7,0.7,0.7,1.0};
+        GLfloat diffuseLight[4]={0.2,0.2,0.2,1.0};          // "cor"
+        GLfloat specularLight[4]={0.7, 0.7, 0.7, 1.0};// "brilho"
+        GLfloat lightPosition[4]={0.0, 1.0, 0.0, 1.0};
+        GLfloat specularity[4]={0.1,0.1,0.1,1};
 
-        GLfloat especularidade[4]={1,1,1,1};
-        GLint especMaterial = 60;
+        glMaterialfv(GL_FRONT,GL_SPECULAR, specularity);
 
-        //glMaterialfv(GL_FRONT,GL_SPECULAR, especularidade);
-       // glMateriali(GL_FRONT,GL_SHININESS,especMaterial);
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+        glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight );
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight );
+        glLightfv(GL_LIGHT0, GL_POSITION, lightPosition );
 
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
-
-        glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular );
-        glPushMatrix();
-        glTranslatef(0, 0, 0);
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa );
-        glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz );
-        glPopMatrix();
-
-     /*   glLightfv(GL_LIGHT1, GL_DIFFUSE, luzDifusa );
-        glLightfv(GL_LIGHT1, GL_POSITION, posicaoLuz1 );
-        glLightfv(GL_LIGHT2, GL_DIFFUSE, luzDifusa );
-        glLightfv(GL_LIGHT2, GL_POSITION, posicaoLuz2 );*/
 
 
 }
@@ -968,7 +956,7 @@ void drawAirConditioning(GLfloat x, GLfloat z) {
     glPushMatrix();
         glTranslatef(1.8f+ x, 0.40f, -7.5f+ z);
         glColor3f(1.0f, 1.0f, 1.0f);
-        glScalef(0.3, 0.15, 0.5);
+        glScalef(0.15, 0.3, 0.5);
         glutSolidCube(1.0);
     glPopMatrix();
 }
@@ -1101,6 +1089,12 @@ void drawSculture(){
 	glPopMatrix();
 }
 
+void cameraViewUpdate(void){
+   	ly = sin(angleY);
+    lx = sin(angleXZ);
+    lz = -cos(angleXZ);
+}
+
 void reshape(int w, int h)
 {
 
@@ -1138,6 +1132,7 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 glLoadIdentity();
 ilumination();
 // Set the camera
+cameraViewUpdate();
 gluLookAt(x, y, z, x+lx, y+ly, z+lz, 0.0f, 1.0f, 0.0f);
 
 
@@ -1157,9 +1152,9 @@ drawRack(0.05f, 0.6f, 0.0f);
 
 drawObjectsRack(0.0f, 0.0f, 0.0f);
 
-drawAirConditioning(0.0f, 0.0f);
-drawAirConditioning(0.0f, 4.0f);
-drawAirConditioning(-3.6f, 4.0f);
+drawAirConditioning(0.124f, 0.0f);
+drawAirConditioning(0.124f, 4.0f);
+drawAirConditioning(-3.724f, 4.0f);
 
 drawTV(0.0f, 0.0f, 0.0f);
 drawInternWalls();
@@ -1185,27 +1180,21 @@ void processNormalKeys(unsigned char key, int x2, int y2) {
 
         case 'w':
         	angleY += 0.05f;
-        	ly = sin(angleY);
         	break;
         case 's':
         	angleY -= 0.05f;
-        	ly = sin(angleY);
         	break;
         case 'a':
         	angleXZ -= 0.05f;
-        	lx = sin(angleXZ);
-        	lz = -cos(angleXZ);
         	break;
         case 'd':
         	angleXZ += 0.05f;
-        	lx = sin(angleXZ);
-        	lz = -cos(angleXZ);
         	break;
         case 'r':
-        	y += 0.4;
+        	y += 0.1;
         	break;
         case 'f':
-        	y -= 0.4;
+        	y -= 0.1;
         	if(y<0)
         		y=0.1;
         	break;
@@ -1214,8 +1203,6 @@ void processNormalKeys(unsigned char key, int x2, int y2) {
             exit(0);
         break;
     }
-
-
 }
 
 void processSpecialKeys(int key, int xx, int yy) {
@@ -1226,7 +1213,6 @@ void processSpecialKeys(int key, int xx, int yy) {
         case GLUT_KEY_LEFT :
         	x += lz * fraction;
         	z -= lx * fraction;
-
         break;
 
         case GLUT_KEY_RIGHT :
@@ -1246,6 +1232,33 @@ void processSpecialKeys(int key, int xx, int yy) {
     }
 }
 
+void mousePassive(int x, int y){
+    mouseX = x;
+    mouseY = y;
+}
+
+void mouseMotion(int x, int y){
+    const float SPEED = 100;
+
+    angleXZ += (mouseX-x)/SPEED;
+    angleY -= (mouseY-y)/SPEED;
+    mousePassive(x, y);
+    glutPostRedisplay();
+}
+
+void mouseFunc(int button, int state, int xx, int yy){
+    float limiter = 0.2;
+
+    if(button == 3){
+        x += lx*limiter;
+        z += lz*limiter;
+    } else if (button == 4){
+        x -= lx*limiter;
+        z -= lz*limiter;
+    }
+
+}
+
 int main(int argc, char **argv)
 {
 
@@ -1260,6 +1273,9 @@ glutCreateWindow("Museum ZG");
 init();
 
 // register callbacks
+glutMotionFunc(mouseMotion);
+glutPassiveMotionFunc(mousePassive);
+glutMouseFunc(mouseFunc);
 glutDisplayFunc(renderScene);
 glutReshapeFunc(reshape);
 glutIdleFunc(renderScene);
@@ -1274,4 +1290,3 @@ glutMainLoop();
 
 return 1;
 }
-
