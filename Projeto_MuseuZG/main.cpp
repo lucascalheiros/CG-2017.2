@@ -39,7 +39,6 @@ void ilumination (void) {
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight );
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight );
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition );
-
 }
 
 void drawGround() {
@@ -60,25 +59,37 @@ void drawSky() {
     // Draw sky
     glColor3f(0.5f, 0.8f, 0.9f);
     glBegin(GL_QUADS);
-        glVertex3f(-100.0f, 50.0f, -100.0f);
-        glVertex3f(-100.0f, 50.0f, 100.0f);
-        glVertex3f( 100.0f, 50.0f, 100.0f);
-        glVertex3f( 100.0f, 50.0f, -100.0f);
+        glVertex3f(-100.0f, 40.0f, -100.0f);
+        glVertex3f(-100.0f, 40.0f, 100.0f);
+        glVertex3f( 100.0f, 40.0f, 100.0f);
+        glVertex3f( 100.0f, 40.0f, -100.0f);
     glEnd();
 
 }
 
 void drawMuseum(){
 
-glColor3f(1, 1, 0.3);
+glColor3f(1, 1, 0.5);
 glScalef(1.89f, 1.89f, 1.89f);
 
 // Front side
 glPushMatrix();
-
-        glTranslatef(0.0f, 1.3f, 0.0f);
-      glBindTexture(GL_TEXTURE_2D, texture_id[11]);
-       glBegin(GL_QUADS);  // Wall
+		glBindTexture(GL_TEXTURE_2D, texture_id[14]);
+		glBegin(GL_QUADS);  // Wall
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(-2, 0.0001, 1);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(2, 0.0001, 1);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(2, 0.0001, -10);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(-2,0.0001, -10);
+		glEnd();
+		
+		glColor3f(1, 1, 0.3);
+		glTranslatef(0.0f, 1.3f, 0.0f);
+		glBindTexture(GL_TEXTURE_2D, texture_id[11]);
+		glBegin(GL_QUADS);  // Wall
 			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(0.3, 0, 1);
 			glTexCoord2f(1.0f, 1.0f);
@@ -87,9 +98,9 @@ glPushMatrix();
 			glVertex3f(2, -1.5, 1);
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.3,-1.5, 1);
-        glEnd();
+		glEnd();
 
-        glBegin(GL_QUADS);  // Wall
+		glBegin(GL_QUADS);  // Wall
 			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(-2, 0, 1);
 			glTexCoord2f(0.0f, 1.0f);
@@ -111,6 +122,64 @@ glPushMatrix();
 			glVertex3f(0.3,-0.25, 1);
 		glEnd();
 
+		glBegin(GL_QUADS);  // Roof
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(-2, 0.33, 1);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(2, 0.33, 1);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(2,0.1, 1);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(-2,0.1, 1);
+        glEnd();
+
+        glBegin(GL_QUADS);  // Roof
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(-2, 0.6, 1);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(2, 0.6, 1);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(2,0.1, 1);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(-2,0.1, 1);
+        glEnd();
+        
+    glPushMatrix();
+        glBegin(GL_QUADS);  // Wall Back
+			glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(-2,0.7,-10);
+			glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(2,0.7,-10);
+			glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(2,-1.5,-10);
+			glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-2,-1.5,-10);
+        glEnd();
+        
+    	glBegin(GL_QUADS);  // Wall Right
+			glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(2, 0.7, 1);
+			glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(2, 0.7, -10);
+			glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(2, -1.5, -10);
+			glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(2, -1.5, 1);
+        glEnd();
+        
+        glBegin(GL_QUADS);  // Wall Left
+			glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(-2,0.7,1);
+			glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-2,0.7,-10);
+			glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(-2,-1.5,-10);
+			glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-2,-1.5,1);
+        glEnd();
+    glPopMatrix();
+
+    glColor3f(0.9f, 0.9f, 0.0f);
 
         glColor3f(0.8f, 0.8f, 0.8f);
         glBegin(GL_QUADS);  // Roof
@@ -120,15 +189,6 @@ glPushMatrix();
             glVertex3f(-2,0, 1);
         glEnd();
 
-        glColor3f(0.9f, 0.9f, 0.0f);
-        glBegin(GL_QUADS);  // Roof
-            glVertex3f(-2, 0.33, 1);
-            glVertex3f(2, 0.33, 1);
-            glVertex3f(2,0.1, 1);
-            glVertex3f(-2,0.1, 1);
-        glEnd();
-
-        glColor3f(0.8f, 0.8f, 0.8f);
         glBegin(GL_QUADS);  // Roof
             glVertex3f(-2, 0.4, 1);
             glVertex3f(2, 0.4, 1);
@@ -136,15 +196,6 @@ glPushMatrix();
             glVertex3f(-2,0.1, 1);
         glEnd();
 
-        glColor3f(0.9f, 0.9f, 0.0f);
-        glBegin(GL_QUADS);  // Roof
-            glVertex3f(-2, 0.6, 1);
-            glVertex3f(2, 0.6, 1);
-            glVertex3f(2,0.1, 1);
-            glVertex3f(-2,0.1, 1);
-        glEnd();
-
-        glColor3f(0.8f, 0.8f, 0.8f);
         glBegin(GL_QUADS);  // Roof
             glVertex3f(-2, 0.7, 1);
             glVertex3f(2, 0.7, 1);
@@ -155,65 +206,6 @@ glPushMatrix();
 
 glColor3f(0.9f, 0.9f, 0.0f);
 
-// Back side
-    glPushMatrix();
-        glTranslatef(0.0f, 1.3f, 0.0f);
-        glBegin(GL_QUADS);  // Wall
-            glVertex3f(-2,0.7,-10);
-            glVertex3f(2,0.7,-10);
-            glVertex3f(2,-1.5,-10);
-            glVertex3f(-2,-1.5,-10);
-        glEnd();
-    glPopMatrix();
-
-glColor3f(0.9f, 0.9f, 0.0f);
-
-// Right side
-    glPushMatrix();
-        glTranslatef(0.0f, 1.3f, 0.0f);
-
-        glBegin(GL_QUADS);  // Wall
-            glVertex3f(2, 0.7, 1);
-            glVertex3f(2, 0.7, -10);
-            glVertex3f(2, -1.5, -10);
-            glVertex3f(2, -1.5, 1);
-        glEnd();
-
-        glColor3f(0.9f, 0.9f, 0.9f);
-        glBegin(GL_QUADS);  // Window Right
-            glVertex3f(2.0001, -0.3, -2.5);
-            glVertex3f(2.0001, -0.3, -1.75);
-            glVertex3f(2.0001, -0.3 - 0.5, -1.75);
-             glVertex3f(2.0001, -0.3 - 0.5, -2.5);
-        glEnd();
-
-        glBegin(GL_QUADS);  // Window Middle
-           glVertex3f(2.0001, -0.3, -1.25);
-            glVertex3f(2.0001, -0.3, -0.5);
-            glVertex3f(2.0001, -0.3 - 0.5, -0.5);
-             glVertex3f(2.0001, -0.3 - 0.5, -1.25);
-        glEnd();
-
-        glBegin(GL_QUADS);  // Window Left
-           glVertex3f(2.0001, -0.3, 0.0);
-            glVertex3f(2.0001, -0.3, 0.75);
-            glVertex3f(2.0001, -0.3 - 0.5, 0.75);
-             glVertex3f(2.0001, -0.3 - 0.5, 0.0);
-        glEnd();
-    glPopMatrix();
-
-    glColor3f(0.9f, 0.9f, 0.0f);
-
-// Left side
-    glPushMatrix();
-        glTranslatef(0.0f, 1.3f, 0.0f);
-        glBegin(GL_QUADS);  // Wall
-            glVertex3f(-2,0.7,1);
-            glVertex3f(-2,0.7,-10);
-            glVertex3f(-2,-1.5,-10);
-            glVertex3f(-2,-1.5,1);
-        glEnd();
-    glPopMatrix();
 
 // Top
     glPushMatrix();
@@ -707,13 +699,14 @@ void drawWindows() {
 }
 
 void drawInternWalls() {
-
+	
+	int tex[] = {13,13,13,13,13,13};
     // divisory
      glPushMatrix();
         glTranslatef(1.189f, -1.2f, -6.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(1.6, 2.5, 0.1);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     // small
@@ -721,7 +714,7 @@ void drawInternWalls() {
         glTranslatef(-0.4f, -1.3001f, -9.73f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 0.5);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     // small2
@@ -729,7 +722,7 @@ void drawInternWalls() {
         glTranslatef(0.4f, -1.2f, -6.7f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 2.5, 0.5);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     // small3
@@ -737,7 +730,7 @@ void drawInternWalls() {
         glTranslatef(-0.4f, -1.3001, -6.7f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 0.5);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     // divisory2
@@ -745,7 +738,7 @@ void drawInternWalls() {
         glTranslatef(-0.7f, -1.3001f, -6.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.7, 4.0, 0.1);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     // divisory3
@@ -753,89 +746,91 @@ void drawInternWalls() {
         glTranslatef(-1.0f, -1.3001f, -3.5f);
         glColor3f(0.9f, 0.9f, 0.9f);
         glScalef(0.1, 4.0, 6.0);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
 }
 
 void drawBank(GLfloat x, GLfloat z) {
 
+	int tex[] = {10,10,10,10,10,10};
     //acento
     glPushMatrix();
         glTranslatef(-1.5f+ x, -1.0f, -0.6f + z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.3f, 0.3f, 0.3f);
         glScalef(0.5, 0.1, 1.0);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     //pés
     glPushMatrix();
         glTranslatef(-1.6f+ x, -1.5f, -0.3f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.1, 1.0, 0.1);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.4f+ x, -1.5f, -0.3f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.1, 1.0, 0.1);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.4f+ x, -1.5f, -0.9f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.1, 1.0, 0.1);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
      glPushMatrix();
         glTranslatef(-1.6f+ x, -1.5f, -0.9f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.1, 1.0, 0.1);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
      glPopMatrix();
 
 }
 
 void drawChair(GLfloat x, GLfloat z) {
-
+	
+	int tex[] = {10,10,10,10,10,10};
     //acento
     glPushMatrix();
         glTranslatef(-1.2f + x, -1.0f, 0.2f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(1,1,1);
         glScalef(0.4, 0.04, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     //pés
     glPushMatrix();
         glTranslatef(-1.35f+ x, -1.5f, 0.35f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.0, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.05f+ x, -1.5f, 0.35f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.0, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.05f+ x, -1.5f, 0.1f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.0, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
      glPushMatrix();
         glTranslatef(-1.35f+ x, -1.5f, 0.1f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.0, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     // encosto
@@ -843,50 +838,51 @@ void drawChair(GLfloat x, GLfloat z) {
         glTranslatef(-1.2f+ x, -1.05f, 0.1f+ z);
         glRotatef(90.0f, 1, 0, 0);
         glTranslatef(0.0f, 0.28f, -0.25f);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(1,1,1);
         glScalef(0.4, 0.04, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
 }
 
 void drawTable(GLfloat x, GLfloat z) {
 
+	int tex[] = {10,10,10,10,10,10};
     // tampo
     glPushMatrix();
         glTranslatef(-1.2f+ x, -0.85f, -0.6f + z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(1,1,1);
         glScalef(0.7, 0.05, 0.7);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     //pés
     glPushMatrix();
         glTranslatef(-1.4f+ x, -1.5f, -0.4f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.3, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.0f+ x, -1.5f, -0.4f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.3, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.0f+ x, -1.5f, -0.8f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.3, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
      glPushMatrix();
         glTranslatef(-1.4f+ x, -1.5f, -0.8f+ z);
-        glColor3f(0.3f, 0.0f, 0.0f);
+        glColor3f(0.1,0.1,0.1);
         glScalef(0.05, 1.3, 0.05);
-        glutSolidCube(1.0);
+        drawCube(1.0, tex);
     glPopMatrix();
 
 
@@ -894,13 +890,14 @@ void drawTable(GLfloat x, GLfloat z) {
 }
 
 void drawRack(GLfloat x, GLfloat y, GLfloat z) {
-
+	
+	int tex[] = {10,10,10,10,10,10};
     // partition1
     glPushMatrix();
         glTranslatef(-0.8f + x, -1.0f , -6.7f);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.5, 0.04, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0,tex);
     glPopMatrix();
 
     // partition2
@@ -908,7 +905,7 @@ void drawRack(GLfloat x, GLfloat y, GLfloat z) {
         glTranslatef(-0.8f + x, -1.0f + y, -6.7f + z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.5, 0.04, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0,tex);
     glPopMatrix();
 
     // partition3
@@ -916,7 +913,7 @@ void drawRack(GLfloat x, GLfloat y, GLfloat z) {
         glTranslatef(-0.8f + x, -1.2f + y, -6.7f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.5, 0.04, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0,tex);
     glPopMatrix();
 
     // partition4
@@ -924,7 +921,7 @@ void drawRack(GLfloat x, GLfloat y, GLfloat z) {
         glTranslatef(-0.8f + x, -1.4f + y, -6.7f+ z);
         glColor3f(0.3f, 0.0f, 0.0f);
         glScalef(0.5, 0.04, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0,tex);
     glPopMatrix();
 
     //planos laterais
@@ -932,14 +929,14 @@ void drawRack(GLfloat x, GLfloat y, GLfloat z) {
         glTranslatef(-0.55f + x, -1.54f+ y, -6.72f+ z);
         glColor3f(0.5f, 0.f, 0.0f);
         glScalef(0.03, 1.1, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0,tex);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.04f+ x, -1.54f+ y, -6.72f+ z);
         glColor3f(0.5f, 0.0f, 0.0f);
         glScalef(0.03, 1.1, 0.4);
-        glutSolidCube(1.0);
+        drawCube(1.0,tex);
     glPopMatrix();
 
 }
@@ -949,38 +946,39 @@ void drawObjectsRack(GLfloat x, GLfloat y, GLfloat z) {
     // teaplot
      glPushMatrix();
         glTranslatef(-0.75f+ x, -0.90f + y, -6.8f + z);
-        glColor3f(0.0f, 0.0f, 0.9f);
+       glColor3f(0.7f, 0.4f, 0.4f);
         glScalef(0.08, 0.08, 0.08);
-        glutWireTeapot(1.0);
+        glutSolidTeapot(1.0);
     glPopMatrix();
 
     // torus
     glPushMatrix();
         glTranslatef(-0.75f+ x, -0.72f + y, -6.8f + z);
-        glColor3f(0.0f, 0.0f, 0.9f);
+       glColor3f(0.7f, 0.4f, 0.4f);
         glScalef(0.2, 0.2, 0.2);
         glRotatef(-50, 1,0,0);
-        glutWireTorus(0.1, 0.3, 20,20);
+        glutSolidTorus(0.1, 0.3, 20,20);
     glPopMatrix();
 
     // object
     glPushMatrix();
         glTranslatef(-0.75f + x, -0.52f + y, -6.8f+ z);
-       glColor3f(0.0f, 0.0f, 0.9f);
+       glColor3f(0.7f, 0.4f, 0.4f);
         glScalef(0.8, 0.8, 0.8);
-        glutWireSphere(0.1, 10, 20);
+        glutSolidSphere(0.1, 10, 20);
     glPopMatrix();
 
 }
 
 void drawAirConditioning(GLfloat x, GLfloat z) {
-
-    glPushMatrix();
-        glTranslatef(1.8f+ x, 0.40f, -7.5f+ z);
-        glColor3f(1.0f, 1.0f, 1.0f);
-        glScalef(0.15, 0.3, 0.5);
-        glutSolidCube(1.0);
-    glPopMatrix();
+	int tex[] = {12,-1,12,-1,-1,-1};
+	
+	glPushMatrix();
+		glTranslatef(1.8f+ x, 0.40f, -7.5f+ z);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glScalef(0.15, 0.3, 0.5);
+		drawCube(1.0,tex);
+	glPopMatrix();
 }
 
 void drawTV (GLfloat x, GLfloat y, GLfloat z) {
@@ -1007,35 +1005,34 @@ void drawSculture(){
 	x=1;
 	y=0.5;
 	z=-3;
-
+	int tex[] = {16,16,16,16,16,16};
 	glTranslatef(0.0f, -1.3f, 0.0f);
-
 	glPushMatrix();
 		glTranslatef(1,0.25,-1.5);
 		glColor3f(0.1f, 0.1f, 0.0f);
 		glScalef(0.2, 0.5, 0.2);
-		glutSolidCube(1.0);
+		drawCube(1.0, tex);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(1,0.25,-3);
-		glColor3f(1, 1, 1);
+		glColor3f(0.8, 0.8, 0.8);
 		glScalef(0.2, 0.5, 0.2);
-		glutSolidCube(1.0);
+		drawCube(1.0, tex);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(1,0.25,-4.5);
 		glColor3f(0.1f, 0.1f, 0.0f);
 		glScalef(0.2, 0.5, 0.2);
-		glutSolidCube(1.0);
+		drawCube(1.0, tex);
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(1,0.25,-8.5);
 		glColor3f(0.1f, 0.1f, 0.0f);
 		glScalef(0.2, 0.5, 0.2);
-		glutSolidCube(1.0);
+		drawCube(1.0, tex);
 	glPopMatrix();
 
 	//ecultura 1

@@ -1,6 +1,12 @@
 #include "texture.h"
 #include <SFML/Graphics.hpp>
 #include <fstream>
+#define LEFT 0
+#define UP 1
+#define RIGHT 2
+#define DOWN 3
+#define FRONT 4
+#define BACK 5
 
 GLuint texture_id[20];
 
@@ -60,11 +66,77 @@ void drawCube(GLdouble size, int *tex) {
       glTexCoord2f(0.0f, 1.0f);
     glVertex3fv(&v[faces[i][3]][0]);
     glEnd();
-    if(tex[i] >= 0) {
-      glBindTexture(GL_TEXTURE_2D, 0);
-    }
   }
 }
+
+void faceCubeConstructor(double size, int face, int texture) {
+	double position = size/2;
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glBegin(GL_QUADS);
+	if(face == LEFT) {
+		glTexCoord2f(0,0);
+		glVertex3f(-position, 0, 0);
+		glTexCoord2f(1,0);
+		glVertex3f(-position, position, 0);
+		glTexCoord2f(0,1);
+		glVertex3f(-position, 0, position);
+		glTexCoord2f(1,1);
+		glVertex3f(-position, position, position);
+	}
+	if(face == UP) {
+		glTexCoord2f(0,0);
+		glVertex3f(0, position, 0);
+		glTexCoord2f(1,0);
+		glVertex3f(position, position, 0);
+		glTexCoord2f(0,1);
+		glVertex3f(0, position, position);
+		glTexCoord2f(1,1);
+		glVertex3f(position, position, position);
+	}
+	if(face == RIGHT) {
+		glTexCoord2f(0,0);
+		glVertex3f(position, 0, 0);
+		glTexCoord2f(1,0);
+		glVertex3f(position, position, 0);
+		glTexCoord2f(0,1);
+		glVertex3f(position, 0, position);
+		glTexCoord2f(1,1);
+		glVertex3f(position, position, position);
+	}
+	if(face == DOWN) {
+		glTexCoord2f(0,0);
+		glVertex3f(0, -position, 0);
+		glTexCoord2f(1,0);
+		glVertex3f(position, -position, 0);
+		glTexCoord2f(0,1);
+		glVertex3f(0, -position, position);
+		glTexCoord2f(1,1);
+		glVertex3f(position, -position, position);
+	}
+	if(face == FRONT) {
+		glTexCoord2f(0,0);
+		glVertex3f(0, 0, position);
+		glTexCoord2f(1,0);
+		glVertex3f(position, 0, position);
+		glTexCoord2f(0,1);
+		glVertex3f(0, position, position);
+		glTexCoord2f(1,1);
+		glVertex3f(position, position, position);
+	}
+	if(face == BACK) {
+		glTexCoord2f(0,0);
+		glVertex3f(0, 0, -position);
+		glTexCoord2f(1,0);
+		glVertex3f(position, 0, -position);
+		glTexCoord2f(0,1);
+		glVertex3f(0, position, -position);
+		glTexCoord2f(1,1);
+		glVertex3f(position, position, -position);
+	}
+	glEnd();
+}
+
+
 
 void loadTextureFromFile(char const *filename,int index) {
   int width, height;
@@ -101,4 +173,9 @@ void loadTextures(){
 	loadTextureFromFile("texture/quadro10.jpeg", 9);
 	loadTextureFromFile("texture/madeira.jpeg", 10);
 	loadTextureFromFile("texture/front_wall.png", 11);
-}
+	loadTextureFromFile("texture/ar_condicionado.jpeg", 12);
+	loadTextureFromFile("texture/parede_interna1.jpeg", 13);
+	loadTextureFromFile("texture/chao.jpeg", 14);
+	loadTextureFromFile("texture/window.png",15);
+	loadTextureFromFile("texture/scultureTable.jpg", 16);
+	}
