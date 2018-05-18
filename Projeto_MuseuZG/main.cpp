@@ -1,48 +1,44 @@
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <math.h>
+#include "texture.cpp"
 
-// actual vector representing the camera's direction
-float lx = 0.0f, ly = 0,lz = -1.0f;
+// camera's direction
+float lx = 0, ly = 0,lz = -1;
+float angleXZ = 0, angleY = 0;
 
-// XZ position of the camera
-//float x = 0.0f, z = 10.0f;
-float x = 0.0f,y = 1, z =10.0f;
+// camera's position
+float x = 0,y = 1, z =10;
 
-float verticalVectorFix;
 float door_angle = 0.0f;
-
-// angle for rotating triangle
-float angleXZ = 0.0f, angleY = 0;
 
 int mouseX;
 int mouseY;
 
 void init(void) {
-    glClearColor(0.0, 0.0, 0.4, 0.1);
-
-     glEnable(GL_COLOR_MATERIAL);
-     glEnable(GL_LIGHTING);
-     glEnable(GL_LIGHT0);
-     glEnable(GL_DEPTH_TEST);
-     glShadeModel(GL_SMOOTH);
+	glClearColor(0.0, 0.0, 0.4, 0.1);
+	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_TEXTURE_2D);
+	loadTextures();
 }
 
 void ilumination (void) {
-        GLfloat ambientLight[4]={0.7,0.7,0.7,1.0};
-        GLfloat diffuseLight[4]={0.2,0.2,0.2,1.0};          // "cor"
-        GLfloat specularLight[4]={0.7, 0.7, 0.7, 1.0};// "brilho"
-        GLfloat lightPosition[4]={0.0, 1.0, 0.0, 1.0};
-        GLfloat specularity[4]={0.1,0.1,0.1,1};
+	GLfloat ambientLight[4]={0.8,0.8,0.8,1.0};
+	GLfloat diffuseLight[4]={0.3,0.3,0.3,1.0};
+	GLfloat specularLight[4]={0.7, 0.7, 0.7, 1.0};
+	GLfloat lightPosition[4]={0.0, 1.0, 0.0, 1.0};
+	GLfloat specularity[4]={0.1,0.1,0.1,1};
 
-        glMaterialfv(GL_FRONT,GL_SPECULAR, specularity);
+	glMaterialfv(GL_FRONT,GL_SPECULAR, specularity);
 
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
-        glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight );
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight );
-        glLightfv(GL_LIGHT0, GL_POSITION, lightPosition );
-
-
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight );
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight );
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition );
 
 }
 
@@ -74,32 +70,44 @@ void drawSky() {
 
 void drawMuseum(){
 
-glColor3f(1, 1, 0.0);
+glColor3f(1, 1, 0.3);
 glScalef(1.89f, 1.89f, 1.89f);
 
 // Front side
 glPushMatrix();
 
         glTranslatef(0.0f, 1.3f, 0.0f);
-
+      glBindTexture(GL_TEXTURE_2D, texture_id[11]);
        glBegin(GL_QUADS);  // Wall
-            glVertex3f(0.3, 0, 1);
-            glVertex3f(2, 0, 1);
-            glVertex3f(2, -1.5, 1);
-            glVertex3f(0.3,-1.5, 1);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(0.3, 0, 1);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(2, 0, 1);
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(2, -1.5, 1);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(0.3,-1.5, 1);
         glEnd();
 
         glBegin(GL_QUADS);  // Wall
+			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(-2, 0, 1);
+			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(-0.3, 0, 1);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(-0.3, -1.5, 1);
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(-2,-1.5, 1);
 		glEnd();
 
 		glBegin(GL_QUADS);  // Wall
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(0.3, 0, 1);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(-0.3, 0, 1);
+			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(-0.3, -0.25, 1);
+			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(0.3,-0.25, 1);
 		glEnd();
 
@@ -380,89 +388,103 @@ void drawPictures(GLfloat x, GLfloat y, GLfloat z) {
 glTranslatef(0.0f, 1.3f, 0.0f);
 
     // corredor
-
+	int texQuads[10][6] = {
+	{0,0,0,0,0,0},
+	{1,1,1,1,1,1},
+	{2,2,2,2,2,2},
+	{3,3,3,3,3,3},
+	{4,4,4,4,4,4},
+	{5,5,5,5,5,5},
+	{6,6,6,6,6,6},
+	{7,7,7,7,7,7},
+	{8,8,8,8,8,8},
+	{9,9,9,9,9,9}
+	};
+	
+	int texMold[6] = {10,10,10,10,10,10};
+	
     glPushMatrix();
         glTranslatef(-1.05f+ x, -0.30f + y, -2.0f + z);
-        glColor3f(0.1f, 0.1f, 0.1f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.05, 0.7, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.059f+ x, -0.30f + y, -2.02f + z);
-        glColor3f(0.9f, 0.0f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.65, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[9]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.05f+ x, -0.30f + y, -3.5f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.7, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.059f+ x, -0.30f + y, -3.52f + z);
-        glColor3f(0.0f, 0.0f, 0.9f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.65, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[8]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.05f+ x, -0.30f + y, -5.0f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.7, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.059f+ x, -0.30f + y, -5.02f + z);
-        glColor3f(0.0f, 0.7f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.65, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[7]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.95f+ x, -0.30f + y, -2.0f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.7, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.941f+ x, -0.30f + y, -2.02f + z);
-        glColor3f(0.0f, 0.7f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.65, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[6]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.95f+ x, -0.30f + y, -3.5f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.7, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.941f+ x, -0.30f + y, -3.52f + z);
-        glColor3f(0.9f, 0.f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.65, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[5]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.95f+ x, -0.30f + y, -5.0f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.7, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(-1.941f+ x, -0.30f + y, -5.02f + z);
-        glColor3f(0.0f, 0.0f, 0.9f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.65, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[4]);
     glPopMatrix();
 
     // lado direito
@@ -470,56 +492,56 @@ glTranslatef(0.0f, 1.3f, 0.0f);
         glTranslatef(1.95f+ x, -0.20f + y, -0.5f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.9, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.941f+ x, -0.20f + y, -0.5f + z);
-        glColor3f(0.9f, 0.2f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.85, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[3]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.95f+ x, -0.20f + y, -2.0f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.9, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.941f+ x, -0.20f + y, -2.0f + z);
-        glColor3f(0.9f, 0.0f, 0.9f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.85, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[2]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.95f+ x, -0.20f + y, -3.5f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.9, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.941f+ x, -0.20f + y, -3.5f + z);
-        glColor3f(0.5f, 0.8f, 0.8f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.85, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[1]);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.95f+ x, -0.20f + y, -5.0f + z);
         glColor3f(0.1f, 0.1f, 0.1f);
         glScalef(0.05, 0.9, 0.9);
-        glutSolidCube(1.0);
+        drawCube(1.0,texMold);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(1.941f+ x, -0.20f + y, -5.0f + z);
-        glColor3f(0.7f, 0.0f, 0.0f);
+        glColor3f(1.0f, 1.0f, 1.0f);
         glScalef(0.04, 0.85, 0.8);
-        glutSolidCube(1.0);
+        drawCube(1.0,texQuads[0]);
     glPopMatrix();
 
 
