@@ -8,7 +8,7 @@
 #define FRONT 4
 #define BACK 5
 
-GLuint texture_id[20];
+GLuint texture_id[25];
 
 void drawCube(GLdouble size, int *tex) {
   static GLfloat n[6][3] =
@@ -42,6 +42,8 @@ void drawCube(GLdouble size, int *tex) {
   for (i = 5; i >= 0; i--) {
     if(tex[i] >= 0) {
       glBindTexture(GL_TEXTURE_2D, texture_id[tex[i]]);
+    } else {
+    	glBindTexture(GL_TEXTURE_2D, 0);
     }
     glBegin(GL_QUADS);
     glNormal3fv(&n[i][0]);
@@ -157,7 +159,6 @@ image.loadFromFile(filename);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
-  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void loadTextures(){
@@ -176,6 +177,11 @@ void loadTextures(){
 	loadTextureFromFile("texture/ar_condicionado.jpeg", 12);
 	loadTextureFromFile("texture/parede_interna1.jpeg", 13);
 	loadTextureFromFile("texture/chao.jpeg", 14);
-	loadTextureFromFile("texture/window.png",15);
+	loadTextureFromFile("texture/window.jpeg",15);
 	loadTextureFromFile("texture/scultureTable.jpg", 16);
+	loadTextureFromFile("texture/quadro11.jpeg", 17);
+	loadTextureFromFile("texture/quadro12.jpeg", 18);
+	loadTextureFromFile("texture/piso2a.jpeg", 19);
+	loadTextureFromFile("texture/door.png", 20);
+	loadTextureFromFile("texture/teto.jpeg", 21);
 	}
