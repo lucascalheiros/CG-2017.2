@@ -69,7 +69,23 @@ void drawCube(GLdouble size, int *tex) {
     glVertex3fv(&v[faces[i][3]][0]);
     glEnd();
   }
+  /*
+  double tam = size/2;
+  static float vertex[8][3] = {{-tam,-tam,tam}, {tam,-tam,tam}, {-tam,tam,tam}, {tam,tam,tam}, {-tam,-tam,-tam}, {-tam,-tam,-tam}, {-tam,tam,-tam}, {tam,tam,-tam}};
+
+static int link[6][4] = {{0,1,3,2}, {1,5,7,3}, {5,4,6,7}, {4,0,2,6}, {4,5,1,0}, {2,3,7,6}};
+
+glBegin(GL_QUADS);
+for (int a=0; a<6; a++){
+	glVertex3f(vertex[link[a][0]][0], vertex[link[a][0]][1], vertex[link[a][0]][2]);
+	glVertex3f(vertex[link[a][1]][0], vertex[link[a][1]][1], vertex[link[a][1]][2]);
+	glVertex3f(vertex[link[a][2]][0], vertex[link[a][2]][1], vertex[link[a][2]][2]);
+	glVertex3f(vertex[link[a][3]][0], vertex[link[a][3]][1], vertex[link[a][3]][2]);
 }
+glEnd();*/
+}
+
+
 
 void faceCubeConstructor(double size, int face, int texture) {
 	double position = size/2;
@@ -141,24 +157,18 @@ void faceCubeConstructor(double size, int face, int texture) {
 
 
 void loadTextureFromFile(char const *filename,int index) {
-  int width, height;
-  std::ifstream file(filename);
-  if(! file.good())
-    throw "file not found";
-  file.close();
+	int width, height;
 
-sf::Image image;
-image.loadFromFile(filename);
+	sf::Image image;
+	image.loadFromFile(filename);
 
-    printf("%d %d\n", width, height);
+	glGenTextures(1, &texture_id[index]);
+	glBindTexture(GL_TEXTURE_2D, texture_id[index]);
 
-  glGenTextures(1, &texture_id[index]);
-  glBindTexture(GL_TEXTURE_2D, texture_id[index]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
 }
 
 void loadTextures(){
